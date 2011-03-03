@@ -1,0 +1,4 @@
+god           --version 0.7.14
+json          --version 1.1.1
+mysql         --version 2.7
+oniguruma     --version 1.1.0
