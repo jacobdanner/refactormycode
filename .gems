@@ -3,3 +3,7 @@ json          --version 1.1.1
 mysql         --version 2.7
 oniguruma     --version 1.1.0
 rails					--version 2.0.2
+textpow 			--version 0.10.0
+ruby-openid		--version 2.1.7
+ruby-yadis 		--version 0.3.4
+plist					--version 3.0.0
