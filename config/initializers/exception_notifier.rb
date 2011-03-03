@@ -1,1 +1,1 @@
-ExceptionNotifier.exception_recipients = %w(macournoyer@gmail.com)
+ExceptionNotifier.exception_recipients = %w(refactormycode@intridea.com)

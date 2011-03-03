@@ -66,7 +66,7 @@ EOS
   
   def test_announce_article
     response = @client.announce_article :article_author => 'marc',
-                                        :article_author_email => 'macournoyer@gmail.com',
+                                        :article_author_email => 'refactormycode@intridea.com',
                                         :article_title => "Rails plugin test #{Time.now}",
                                         :article_content => "I'm just testing",
                                         :permalink => "http://code.macournoyer.com/svn/plugins/defensio/#{Time.now.to_i}"
