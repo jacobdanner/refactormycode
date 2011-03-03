@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta name="description" content="The code refactoring community.">
+  <title><%=h @title %> - RefactorMyCode.com</title>
+  <%= stylesheet_link_merged :base %>
+  <%= javascript_include_merged :base %>
+  <%= yield :head %>
+  <script type="text/javascript">
+    Application.init();
+    <%= yield(:script) %>
+    Event.observe(window, 'load', function() {
+      // Corner roundin yo!
+      Nifty('div.position');
+      // Page specific script
+      <%= yield :on_load %>
+    });
+  </script>
+  <% if ENV['RAILS_ENV'] == 'production' %>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-167049-3']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  <% end %>
+</head>
+<body id="<%= @controller.class.controller_name %>">
+  
+<div id="header">
+  <h1>
+    <a href="/" title="Home">
+      <span class="Class">Refactor</span>
+      <span class="Symbol">:my</span>
+      =&gt;
+      <span class="String">'code'</span>
+    </a>
+  </h1>
+  
+  <ul id="menu" class="<%= @controller.action_name %>">
+    <%= menu_item :codes, 'Codes', home_path, :class => 'first' %>
+    <%= menu_item :refactorings, 'Refactorings', recent_refactors_path %>
+    <%= menu_item :popular, 'Popular', popular_codes_path %>
+    <%= menu_item :best, 'Best', best_refactorers_path %>
+    <%= menu_item :submit, 'Submit', new_code_path %>
+    <%= menu_item :spam, 'Spam', spam_path, :class => 'if_admin', :style => 'display:none' %>
+    <%= menu_item :account, 'Account', account_path, :class => 'if_logged_in', :style => 'display:none' %>
+    <%= menu_item :logout, 'Logout', logout_path, :class => 'if_logged_in', :style => 'display:none' %>
+    <%= menu_item :login, 'Login', login_path, :class => 'unless_logged_in' %>
+  </ul>
+  
+  <noscript>
+    JavaScript doesn't seem to be activated, expect things to be ugly and sloppy!
+  </noscript>
+  <!--[if lt IE 7]>
+
+    <div id="ie6_warning">
+      <p>
+        This site doesn't play very nice on MS Internet Explorer 6.
+        <a href="http://www.lockergnome.com/news/2004/06/15/why-you-should-dump-internet-explorer/" target="_blank">Do the Internet a favour</a> and <a href="http://www.microsoft.com/windows/products/winfamily/ie/" target="_blank">upgrade to MSIE7</a>.
+        Better yet, make the switch to <a href="http://browsehappy.com/browsers/" target="_blank">a better browser</a>.
+      </p>
+    </div>
+
+  <![endif]-->
+</div>
+
+<div id="container">
+  <div id="sidebar">
+    <%= yield :sidebar %>
+    
+    <%= render :partial => 'layouts/sidebar' %>
+  </div>
+
+  <div id="content">
+    <div id="error" class="flash flash_error" style="display:none"></div>
+    <div id="notice" class="flash flash_notice" style="display:none"></div>
+    <script type="text/javascript">
+      Flash.transferFromCookies();
+      Flash.writeDataTo('error', $('error'));
+      Flash.writeDataTo('notice', $('notice'));
+      Flash.dropOut('notice');
+    </script>
+  
+    <%= yield  %>
+  </div>  
+</div>
+
+<div id="footer">
+  <%= link_to 'API', api_help_path %>,
+  <%= link_to 'Follow me on Twitter for updates', 'http://twitter.com/macournoyer' %>,
+  <%= mail_to 'macournoyer@gmail.com', 'E-mail me', :encode => "javascript" %>
+  
+  &copy; A project by <%= link_to 'Marc-Andr&eacute; Cournoyer', 'http://macournoyer.com' %>
+</div>
+
+<%= javascript_tag 'Application.onBodyLoaded();' %>
+
+</body>
+</html>

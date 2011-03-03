@@ -1,0 +1,9 @@
+if @error
+  page[:error].update @error
+  page[:error].show
+  page.call 'Flash.dropOut', :error
+else
+  page[:notice].update "Following this code, you'll receive an email when a new refactoring is done"
+  page[:notice].show
+  page.call 'Flash.dropOut', :notice
+end

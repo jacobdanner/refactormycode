@@ -1,0 +1,14 @@
+marc:
+  id: 1
+  name: Marc
+  email: macournoyer@yahoo.ca
+  identity_url: http://macournoyer.myopenid.com
+  alternative_identity_url: http://macournoyer.wordpress.com
+  admin: 1
+
+arthur:
+  id: 2
+  name: arthur
+  email: arthur@hotmail.com
+  identity_url: http://arthur.myopenid.com
+  admin: 0

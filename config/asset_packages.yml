@@ -1,0 +1,19 @@
+--- 
+javascripts: 
+- base: 
+  - prototype
+  - effects
+  - dragdrop
+  - controls
+  - cookie
+  - json
+  - flash
+  - application
+  - rating
+  - corners
+stylesheets: 
+- base: 
+  - scaffold
+  - application
+  - code
+  - corners

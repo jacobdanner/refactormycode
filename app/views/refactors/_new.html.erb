@@ -1,0 +1,48 @@
+<div id="new_refactor_notice" class="notice" style="display:none"></div>
+<% remote_form_for :refactor, :url => refactors_path(@code),
+                              :loading => "$('new_refactor_actions').hide(); $('new_refactor_spinner').show()",
+                              :complete => "$('new_refactor_actions').show(); $('new_refactor_spinner').hide()",
+                              :html => { :id => 'new_refactor_form' } do |f| -%>
+  <% if logged_in? %>
+    <div class="action">
+      Logged in as <%= link_to h(current_user.name), user_path(current_user) %>,
+      <%= link_to 'Logout', logout_path, :method => :delete %> ?
+    </div>
+  <% else %>
+    <p>
+      <label for="refactor_user_name">Name</label><br/>
+      <%= f.text_field :user_name %>
+    </p>
+    <p>
+      <label for="refactor_user_email">Email</label><br/>
+      <%= f.text_field :user_email %>
+    </p>
+    <p>
+      <label for="refactor_user_website">Website</label><br/>
+      <%= f.text_field :user_website %>
+    </p>
+  <% end %>
+  <p>
+    <label for="refactor_comment">Comment</label><br/>
+    <%= f.text_area :comment, :rows => 4 %>
+  </p>
+  <p>
+    <%= link_to 'Format', code_help_path, :class => 'action', :target => '_blank' %>
+    <%= link_to_function 'Copy from initial code',
+                         "$('refactor_code').update($('unformated_code').innerHTML)", :class => 'action' %>
+    <label for="refactor_code">Code</label><br/>
+    <%= f.text_area :code, :class => 'code' %>
+  </p>
+  <!-- <p>
+    <%= f.check_box :notify_me %>
+    <label for="refactor_notify_me">Notify me of new refactorings by email</label>
+  </p> -->
+  
+  <div id="new_refactor_actions">
+    <%= submit_tag 'Submit' %>
+    or
+    <%= scroll_to 'Cancel', 'banner', :class => 'cancel' %>
+    <span id="new_refactor_error" class="error"></span>    
+  </div>  
+  <%= image_tag 'spinner.gif', :id => 'new_refactor_spinner', :style => 'display:none' %>
+<% end -%>

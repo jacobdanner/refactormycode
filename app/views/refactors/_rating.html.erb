@@ -1,0 +1,8 @@
+<%= pluralize(refactor.ratings_count || 0, 'rating') %>.
+<% if !logged_in? %>
+  <%= link_to 'Login', login_path %> to rate!
+<% elsif rated?(refactor) %>
+  You rated it!
+<% elsif !owner?(refactor) %>
+  You haven't rated it!
+<% end %>

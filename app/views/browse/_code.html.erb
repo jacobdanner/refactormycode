@@ -1,0 +1,23 @@
+<div id="<%= dom_id(code) %>" class="badge">
+  <%= format_code truncate_lines(code.code, 3), code.language, :no_title => true %>
+  
+  <div class="content">
+    <h1>
+      <span class="language <%= language_css(code.language) %>"><%= code.language %></span>
+      <%= link_to truncate(h(code.title)), code_path(code) %>
+    </h1>
+  
+    <div class="info">
+      by <%= link_to h(code.user.name), user_path(code.user) %>,
+      <%= cachable_time_ago_in_words code.created_at %>,
+      <%= pluralize code.refactors_count, 'refactoring' %><%= tag_list(code) %>
+    </div>
+
+    <div class="comment">
+      <%= markup truncate(code.comment) %>
+    </div>
+  </div>
+
+  <%= avatar code.user %>
+  <%= image_tag 'talk.gif', :class => 'talk' %>
+</div>

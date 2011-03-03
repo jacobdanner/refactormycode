@@ -1,0 +1,38 @@
+<div class="action">
+  <%= button_to 'Delete all', destroy_all_spam_path, :confirm => 'Are you sure?', :method => :delete %>
+</div>
+<h1><%=h @title = 'Manage refactorings' %></h1>
+
+<div id="stats">
+  <%= render :partial => 'stats' %>  
+</div>
+
+<% @refactors.each do |refactor| %>
+  <% div_for refactor, :class => cycle(:even, :odd) do %>
+    <span class="side_actions">
+      <%= link_to_remote_with_spinner 'Delete', :url => refactor_path(refactor.refactored_code, refactor),
+                                                :method => :delete, :id => dom_id(refactor, :delete) %>
+      <%= link_to_remote_with_spinner 'Not spam', :url => mark_as_ham_refactor_path(refactor.refactored_code, refactor),
+                                                  :id => dom_id(refactor, :not_spam)%>
+    </span>
+    
+    <h3>On <%= link_to h(refactor.refactored_code.title),
+                       refactor_path(refactor.refactored_code, refactor) %></h3>
+    <div class="info">
+      by <%= link_to_user refactor %>,
+      <%= cachable_time_ago_in_words refactor.created_at %>
+    </div>
+
+    <div class="comment">
+      <%= markup truncate(refactor.comment, 100) %>
+    </div>
+
+    <div class="code">
+      <div class="section">
+        <pre class="sunburst"><%=h truncate(refactor.code, 100) %></pre>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= will_paginate @refactors %>

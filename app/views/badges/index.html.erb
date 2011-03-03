@@ -1,0 +1,14 @@
+<h1><%= @title = "Your refactorer's badge" %></h1>
+
+<p>
+  <%= badge_tag @user %>
+</p>
+
+<p>Paste this on your blog and get famous!</p>
+<% content_for :on_load do %>
+  $('code').focus();
+<% end %>
+
+<textarea rows="3" onfocus="this.select()" id="code">
+<%=h badge_tag(@user) %>
+</textarea>

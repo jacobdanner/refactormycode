@@ -1,0 +1,54 @@
+<% @title = @code.title %>
+
+<script type="text/javascript" charset="utf-8">
+  CurrentUser.author = <%= author_of_code? %>;
+</script>
+
+<%= avatar @code.user %>
+<div id="banner">
+  <h1>
+    <span class="language <%= language_css @code.language %>"><%= @code.language %></span>
+    <%=h @code.title %>
+  </h1>
+
+  <div class="info">
+    Posted <%= cachable_time_ago_in_words @code.created_at %>
+    by <%= link_to h(@code.user.name), user_path(@code.user) %><%= tag_list(@code) %>
+  </div>
+
+  <ul class="nav">
+    <li><%= link_to 'Edit', edit_code_path(@code),
+                    :class => 'edit' if author_of_code? %></li>
+    <li><%= link_to_remote_with_spinner 'Follow by email',
+                                        { :url => follow_code_path(@code) },
+                                        { :class => 'email' } if logged_in? %></li>
+    <li><%= link_to 'Pastable', pastable_code_path(@code), :class => 'paste' %></li>
+    <li><%= scroll_to 'Refactor it!', 'new_refactor_form', :class => 'add_comment',
+                      :highlight => 'new_refactor' %></li>
+    <li><%= scroll_to pluralize(@code.refactors_count, 'refactoring'), 'refactors',
+                      :id => 'refactors_count', :class => 'comments' %></li>
+  </ul>
+</div>
+
+<% cache do %>
+  <div class="comment">
+    <%= markup @code.comment %>
+  </div>
+
+  <%= format_code @code.code, @code.language %>
+  <div id="unformated_code" style="display:none"><%=h @code.code %></div>
+<% end %>
+
+<h2>Refactorings</h2>
+<div id="refactors">
+  <p id="no_refactoring">No refactoring yet !</p>
+  <%= javascript_tag "$('no_refactoring').hide()" unless @code.refactors.empty? %>
+  <% @code.refactors.each do |refactor| %>
+    <%= render :partial => "refactors/refactor_div", :locals => { :refactor => refactor } %>
+  <% end %>
+</div>
+
+<div id="new_refactor">
+  <h2>Your refactoring</h2>
+  <%= render :partial => "refactors/new" %>  
+</div>

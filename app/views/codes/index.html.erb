@@ -1,0 +1,7 @@
+<% @title = 'Code submissions' %>
+
+<% cache :page => params[:page] || 1 do %>
+  <%= render :partial => 'code', :collection => @codes %>
+
+  <%= will_paginate @codes %>
+<% end %>

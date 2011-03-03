@@ -1,0 +1,41 @@
+<!-- No search for now sorry...
+<div class="search">
+  <% form_tag search_path, :method => :get do %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag 'Search', :class => 'button' %>
+  <% end %>
+</div> -->
+
+<div class="ad">
+  <p>Learn How to Create Your Own Programming Language<br/>
+  <%= link_to "createyourproglang.com", "http://createyourproglang.com/" %></p>
+  <script type="text/javascript"><!--
+    google_ad_client = "pub-3465117494742004";
+    /* RmC 160x90 */
+    google_ad_slot = "2432790807";
+    google_ad_width = 160;
+    google_ad_height = 90;
+    //-->
+  </script>
+  <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+
+<% cache 'sidebar' do %>
+  <% if @recent_codes %>
+    <h2>Recent</h2>
+    <ul class="codes">
+    <% @recent_codes.each do |code| %>
+      <li><%= link_to h(code.title), code_path(code) %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  
+  <% if @popular_codes %>
+    <h2>Popular</h2>
+    <ul class="codes">
+    <% @popular_codes.each do |code| %>
+      <li><%= link_to h(code.title), code_path(code) %></li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>

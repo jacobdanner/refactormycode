@@ -1,0 +1,2 @@
+page.replace_html :stats, :partial => 'stats'
+page.visual_effect 'SwitchOff', dom_id(@refactor)

@@ -1,0 +1,7 @@
+page << "if ($('refactors_count')) {"
+  page[:refactors_count].update pluralize(@code.refactors_count - 1, 'refactoring')
+  page[:no_refactoring].show if @code.refactors_count == 1
+page << "}"
+
+page.visual_effect 'SwitchOff', dom_id(@refactor)
+

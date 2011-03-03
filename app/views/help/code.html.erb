@@ -1,0 +1,46 @@
+<div id="banner">
+  <h1><%= @title = 'Code format' %></h1>
+
+  <ul>
+    <li><%= scroll_to 'Sections', 'sections' %></li>
+    <li><%= scroll_to 'Syntaxes', 'syntaxes' %></li>
+  </ul>
+</div>
+
+<h2 id="sections">Sections</h2>
+<p>Section allows you to split your code into several sections. It's like files... well kinda.</p>
+<p>To create a section use the following format: <code>## My section name [syntax]</code> (syntax is optional).</p>
+
+<pre>
+<strong>## Controller</strong>
+class MyController &lt; ApplicationController
+end
+
+<strong>## View [html_rails]</strong>
+<%= escape_once '<h2>&lt;%= @title %&gt;</h2>' %>
+
+<strong>## Javascript [javascript]</strong>
+var Page = {
+  hide: function(page) {
+    $(page).hide();
+  }
+};
+</pre>
+
+<p>
+  First section will render in the code syntax (language)
+  and labelled <em>Controller</em>.
+  The second one will be labelled <em>View</em> and highlighted as HTML for Rails.
+</p>
+
+<h2 id="syntaxes">Syntaxes</h2>
+<p>
+  A syntax describes how the code should be highlighted. For example,
+  Ruby code could have ruby_on_rails syntax.
+  Syntax is just a little more specific. Here's the list of supported syntax:
+</p>
+<ul>
+<% @syntaxes.each do |syntax| %>
+  <li><%= syntax %></li>
+<% end %>
+</ul>

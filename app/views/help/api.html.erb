@@ -1,0 +1,230 @@
+<div id="banner">
+  <h1><%= @title = 'API' %></h1>
+  
+  <ul>
+    <li><%= scroll_to 'Browsing codes', 'recent_codes' %></li>
+    <li><%= scroll_to 'Browsing refactorings', 'recent_refactors' %></li>
+    <li><%= scroll_to 'Code submission information', 'codes' %></li>
+  </ul>
+</div>
+
+<p>RefactorMyCode.com API uses XML following <%= link_to 'REST', 'http://en.wikipedia.org/wiki/Representational_State_Transfer' %> principles.
+
+<p>The following examples use <code>curl</code> but could be used with any HTTP client. It's just XML over HTTP!</p>
+
+<p>Another good way to explore the API is to add <code>.xml</code> at then end of the URL of a page you wanna use.</p>
+
+<h2 id="recent_codes">Browsing codes</h2>
+<p>Get most recent codes</p>
+<%= curl :get, url_for(:controller => 'browse', :action => 'recent_codes', :format => :xml, :only_path => false) %>
+
+<p>Get most recent Ruby codes</p>
+<%= curl :get, url_for(:controller => 'browse', :action => 'recent_codes', :language => 'ruby', :format => :xml, :only_path => false) %>
+
+<p>Get most popular codes</p>
+<%= curl :get, url_for(:controller => 'browse', :action => 'popular_codes', :format => :xml, :only_path => false) %>
+
+<p>Get Ruby codes tagged with <em>speed</em></p>
+<%= curl :get, url_for(:controller => 'browse', :action => 'tags', :language => 'ruby', :tags => 'speed', :format => :xml, :only_path => false) %>
+
+<p>You can combine the language part with most calls.</p>
+
+<p>Sample response from those calls:</p>
+
+<% format_block 'xml' do %>
+<?xml version="1.0" encoding="UTF-8"?>
+<codes type="array">
+  <code>
+    <code>rake db:migrate</code>
+    <comment>Yeah baby</comment>
+    <created-at type="datetime">2007-10-28T22:05:59-04:00</created-at>
+    <id type="integer">20</id>
+    <language>Ruby</language>
+
+    <permalink>rails-2-0</permalink>
+    <refactors-count type="integer">2</refactors-count>
+    <title>RaIls 2.0</title>
+    <trackback-url></trackback-url>
+    <updated-at type="datetime">2007-10-30T21:25:03-04:00</updated-at>
+    <user-id type="integer">1</user-id>
+
+    <user>
+      <id type="integer">1</id>
+      <identity-url>http://macournoyer.myopenid.com/</identity-url>
+      <name>macournoyer</name>
+      <rating type="float">0.0</rating>
+      <refactors-count type="integer">30</refactors-count>
+
+      <website>macournoyer.wordpress.com</website>
+    </user>
+  </code>
+  <code>
+    <code>tab() # new tab from current dir
+{
+osascript -e "
+tell application \"iTerm\"
+ tell the first terminal
+  launch session \"Default Session\"
+  tell the last session
+   write text \"cd $(pwd)\"
+  end tell
+ end tell
+end tell"
+}</code>
+    <comment>Here's a small script I wrote to open a new tab in iTerm in the current directory.
+Know any better way of doing this ?
+
+Btw, also introducing a new language: Bash :) Hope you like it!</comment>
+    <created-at type="datetime">2007-10-04T19:48:50-04:00</created-at>
+
+    <id type="integer">19</id>
+    <language>Bash</language>
+    <permalink>open-a-new-tab-in-current-directory-from-iterm</permalink>
+    <refactors-count type="integer">9</refactors-count>
+    <title>Open a new tab in current directory from iTerm</title>
+    <trackback-url></trackback-url>
+
+    <updated-at type="datetime">2007-10-26T23:28:50-04:00</updated-at>
+    <user-id type="integer">1</user-id>
+    <user>
+      <id type="integer">1</id>
+      <identity-url>http://macournoyer.myopenid.com/</identity-url>
+      <name>macournoyer</name>
+
+      <rating type="float">0.0</rating>
+      <refactors-count type="integer">30</refactors-count>
+      <website>macournoyer.wordpress.com</website>
+    </user>
+  </code>
+  ...
+</codes>
+<% end %>
+
+<h2 id="recent_refactors">Browsing refactorings</h2>
+<p>Get most recent refactorings</p>
+<%= curl :get, url_for(:controller => 'browse', :action => 'recent_refactors', :format => :xml, :only_path => false) %>
+
+<p>Same structure as <%= scroll_to 'codes', 'recent_codes' %> applies.</p>
+
+<p>The response should look something like this:</p>
+
+<% format_block 'xml' do %>
+<?xml version="1.0" encoding="UTF-8"?>
+<refactors type="array">
+  <refactor>
+    <code>cool &lt;&lt;-EOS
+thas has some cool c0de
+EOS
+
+puts cool</code>
+    <code-id type="integer">20</code-id>
+    <comment>cool!</comment>
+    <created-at type="datetime">2007-10-30T21:25:02-04:00</created-at>
+
+    <id type="integer">81</id>
+    <language>Ruby</language>
+    <rating type="integer">0</rating>
+    <ratings-count type="integer">0</ratings-count>
+    <title></title>
+    <user-id type="integer"></user-id>
+    <user-name>bobby</user-name>
+
+    <user-website></user-website>
+  </refactor>
+  <refactor>
+    <code>kjhb</code>
+    <code-id type="integer">20</code-id>
+    <comment>yeah</comment>
+    <created-at type="datetime">2007-10-28T22:06:09-04:00</created-at>
+
+    <id type="integer">80</id>
+    <language>Ruby</language>
+    <rating type="integer">0</rating>
+    <ratings-count type="integer">0</ratings-count>
+    <title></title>
+    <user-id type="integer">1</user-id>
+
+    <user-name>macournoyer</user-name>
+    <user-website>macournoyer.wordpress.com</user-website>
+    <user>
+      <id type="integer">1</id>
+      <identity-url>http://macournoyer.myopenid.com/</identity-url>
+      <name>macournoyer</name>
+
+      <rating type="float">0.0</rating>
+      <refactors-count type="integer">30</refactors-count>
+      <website>macournoyer.wordpress.com</website>
+    </user>
+  </refactor>
+</refactors>
+<% end %>
+
+<h2 id="codes">Code submission information</h2>
+<p>Get the information about one code submission</p>
+<%= curl :get, formatted_code_url(Code.find(:first), :xml) %>
+
+<p>The response should look something like this:</p>
+
+<% format_block 'xml' do %>
+<?xml version="1.0" encoding="UTF-8"?>
+<code>
+  <code>def create
+  @code = Code.new(params[:code])
+  if @code.save
+    flash[:notice] = 'Code was successfully created.'
+    redirect_to code_url(@code)
+  else
+    render :action =&gt; "new"
+  end
+end
+</code>
+  <comment>What can I do better w/ this code ? Please help!</comment>
+  <created-at type="datetime">2007-08-30T00:40:35-04:00</created-at>
+  <id type="integer">1</id>
+  <language>Ruby</language>
+
+  <permalink>controller-create-method</permalink>
+  <refactors-count type="integer">2</refactors-count>
+  <title>Controller create method</title>
+  <trackback-url></trackback-url>
+  <updated-at type="datetime">2007-08-30T00:40:35-04:00</updated-at>
+  <user-id type="integer">1</user-id>
+
+  <refactors type="array">
+    <refactor>
+      <code>def create; end</code>
+      <code-id type="integer">1</code-id>
+      <comment></comment>
+      <created-at type="datetime">2007-08-30T01:34:53-04:00</created-at>
+      <id type="integer">7</id>
+
+      <language>ruby</language>
+      <rating type="integer">0</rating>
+      <ratings-count type="integer">0</ratings-count>
+      <title></title>
+      <user-id type="integer">1</user-id>
+      <user-name>macournoyer</user-name>
+
+      <user-website>macournoyer.wordpress.com</user-website>
+    </refactor>
+    <refactor>
+      <code>def create
+  wow
+end</code>
+      <code-id type="integer">1</code-id>
+      <comment>Ahah funnY! Try this instead!</comment>
+      <created-at type="datetime">2007-08-31T21:06:10-04:00</created-at>
+
+      <id type="integer">8</id>
+      <language>ruby</language>
+      <rating type="integer">0</rating>
+      <ratings-count type="integer">0</ratings-count>
+      <title></title>
+      <user-id type="integer">1</user-id>
+
+      <user-name>macournoyer</user-name>
+      <user-website>macournoyer.wordpress.com</user-website>
+    </refactor>
+  </refactors>
+</code>
+<% end %>

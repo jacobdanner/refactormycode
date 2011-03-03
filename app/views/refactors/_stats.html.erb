@@ -1,0 +1,26 @@
+<% if @stats %>
+	<ul>
+	  <li>
+	    <strong><%= number_to_percentage @stats.accuracy*100 %></strong>
+	    correctly identified as spam/ham
+	  </li>
+	  <li>
+	    <strong><%= pluralize @stats.spam, 'spam comment' %></strong>
+	    caught by the filter
+	  </li>
+	  <li>
+	    <strong><%= pluralize @stats.ham, 'ham comment' %></strong>
+	    accepted by the filter
+	  </li>
+	  <li>
+	    <strong><%= pluralize @stats.false_positives, 'time' %></strong>
+	    times a legitimate message was retrained from the spambox
+	  </li>
+	  <li>
+	    <strong><%= pluralize @stats.false_negatives, 'time' %></strong>
+	    a spam message was retrained from comments box
+	  </li>
+	</ul>
+<% else %>
+	<p>Stats not available!</p>
+<% end %>

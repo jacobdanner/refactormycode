@@ -1,0 +1,55 @@
+<div id="banner">
+  <% if @user.email.blank? %>
+    <div class="blank avatar">
+      Set your email to get an avatar
+    </div>
+  <% else %>
+    <%= avatar @user %>
+  <% end %>
+  
+  <h1><%= @title = 'Your account' %></h1>
+  <ul class="nav">
+    <li><%= link_to 'Public profile', user_path(@user), :class => 'account' %></li>
+    <li><%= link_to 'Badge', badges_path, :class => 'tag' %></li>
+  </ul>
+</div>
+
+<%= error_messages_for :user %>
+
+<% form_for :user, :url => account_path, :html => { :method => :put } do |f| -%>
+  <p>
+    <label for="user_name">Name</label><br/>
+    <%= f.text_field :name, :size => 15 %>
+  </p>
+  <p>
+    <label for="user_email">Email</label><br/>
+    <%= f.text_field :email, :size => 30 %>
+    <span class="help">
+      Your email will be used to get your avatar on
+      <%= link_to 'Gravatar', 'http://site.gravatar.com/' %>.
+    </span>
+  </p>
+  <p>
+    <label for="user_website">Website</label><br/>
+    <%= f.text_field :website, :size => 30 %>
+  </p>
+  <p>
+    <label for="user_identity_url">Identity URL (OpenID)</label><br/>
+    <%= f.text_field :identity_url %><br/>
+    <span class="help">
+      Watch out if you change this, it's like changing your password, if your set
+      the wrong thing you won't be able to login again!
+    </span>
+  </p>
+  <p>
+    <label for="user_alternative_identity_url">Alternative Identity URL (OpenID)</label><br/>
+    <%= f.text_field :alternative_identity_url %>
+    <span class="help">
+      In case the other one is down.
+    </span>
+  </p>
+  
+  <p>
+    <%= submit_tag 'Update', :disable_with => 'Updating ...' %>
+  </p>
+<% end -%>

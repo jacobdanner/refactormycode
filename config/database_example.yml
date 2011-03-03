@@ -1,0 +1,16 @@
+login: &login
+  adapter: mysql
+  username: root
+  password: 
+
+development:
+  <<: *login
+  database: refactormycode_development
+  
+test:
+  <<: *login
+  database: refactormycode_test
+
+production:
+  <<: *login
+  database: refactormycode_production

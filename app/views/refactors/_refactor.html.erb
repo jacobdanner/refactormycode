@@ -1,0 +1,53 @@
+<%= avatar refactor.user || refactor.user_email %>
+
+<div class="side_actions">
+  <%= link_to_remote 'Edit', :url => edit_refactor_path(@code, refactor), :method => :get,
+                             :loading => "new Effect.BlindUp('#{dom_id(refactor)}')" if author_of_refactor?(refactor) %>
+  <% if author_of_code? %>
+    <%= link_to_remote_with_spinner 'Delete', :url => refactor_path(@code, refactor),
+                                              :confirm => 'Are you sure?', :method => :delete,
+                                              :id => dom_id(refactor, :delete) %>
+    <%= link_to_remote_with_spinner 'Mark as spam', :url => mark_as_spam_refactor_path(@code, refactor),
+                                                    :id => dom_id(refactor, :spam) %>
+  <% end %>
+</div>
+
+<h3><%= link_to_user refactor %></h3>
+<h4>
+  <%= human_date refactor.created_at %>,
+  <%= cachable_time_ago_in_words refactor.created_at %>,
+  <%= link_to 'permalink', code_refactor_path(refactor) %>
+</h4>
+
+<div class="rating">
+  <span id="rating_<%= refactor.id %>"></span>
+  <%= image_tag 'spinner.gif', :id => "rating_#{refactor.id}_spinner",
+                               :class => 'spinner', :style => 'display:none' %>
+  <span id="rating_<%= refactor.id %>_count" class="count">
+    <%= render :partial => 'refactors/rating', :locals => { :refactor => refactor } %>
+  </span>
+</div>
+<script type="text/javascript" charset="utf-8">
+  var rating_<%= refactor.id %> = new Rating('rating_<%= refactor.id %>', <%= refactor.rating || 0 %>, {
+    onClick: function(rating) {
+      $('rating_<%= refactor.id %>_spinner').show();
+      $('rating_<%= refactor.id %>_count').hide();
+      this.disable();
+      <%= remote_function :url => rate_refactor_path(refactor.refactored_code, refactor),
+                          :with => "'rating=' + rating",
+                          :complete => "$('rating_#{refactor.id}_spinner').hide(); $('rating_#{refactor.id}_count').show();" %>
+    }
+  });
+  <% if !logged_in? || rated?(refactor) || owner?(refactor) %>
+    rating_<%= refactor.id %>.disable();
+  <% end %>
+</script>
+
+<%# Cache this to save on memory usage with code formatting %>
+<% cache refactor_cache_key(refactor) do %>
+  <div class="comment">
+    <%= markup refactor.comment %>
+  </div>
+
+  <%= format_code refactor.code, refactor.language %>
+<% end %>

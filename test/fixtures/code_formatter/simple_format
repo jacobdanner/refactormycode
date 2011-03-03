@@ -1,0 +1,8 @@
+        <div class="code">
+          <div class="section">
+            
+            <pre class="lines">1</pre>
+            <pre class="sunburst">puts <span class="String"><span class="String">'</span>hi<span class="String">'</span></span>
+</pre>
+          </div>
+        </div>

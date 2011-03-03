@@ -1,0 +1,30 @@
+<% cache :controller => 'codes', :action => 'show', :code_id => refactor.refactored_code, :id => refactor do %>
+  <div id="<%= dom_id(refactor) %>" class="badge">
+    <%= format_code truncate_lines(refactor.code, 3), refactor.language, :no_title => true %>
+  
+    <div class="content">
+      <h1>
+        <span class="language <%= language_css refactor.language %>"><%= refactor.language %></span>
+        On
+        <%= link_to truncate(h(refactor.refactored_code.title)), code_refactor_path(refactor) %>
+      </h1>
+  
+      <div class="info">
+        by <%= link_to_user refactor %>,
+        <%= cachable_time_ago_in_words refactor.created_at %>
+        <% unless refactor.rating.blank? || refactor.rating.zero? %>
+          <span class="rating" title="Rated <%= refactor.rating %>/5 by <%= pluralize refactor.ratings_count, 'hacker' %>">
+            <%= image_tag('star_full.png') * (refactor.rating || 0) %>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="comment">
+        <%= markup truncate(refactor.comment) %>
+      </div>
+    </div>
+
+    <%= avatar refactor.user || refactor.user_email %>
+    <%= image_tag 'talk.gif', :class => 'talk' %>
+  </div>
+<% end %>

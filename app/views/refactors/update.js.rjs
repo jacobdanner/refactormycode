@@ -1,0 +1,9 @@
+if @success
+  page.visual_effect 'BlindUp', dom_id(@refactor)
+  page.wait_for_effects do
+    page.replace_html dom_id(@refactor), :partial => 'refactor'
+    page.visual_effect 'BlindDown', dom_id(@refactor)
+  end
+else
+  page.replace_html dom_id(@refactor, :errors), error_messages_for(:refactor)
+end

@@ -1,0 +1,27 @@
+        <div class="code">
+          <div class="section">
+            <h2>My code</h2>
+            <pre class="lines">1
+2
+3
+4</pre>
+            <pre class="sunburst">      <span class="Keyword">def</span> <span class="Entity">code</span>
+        <span class="Constant">1</span>
+      <span class="Keyword">end</span>
+      
+</pre>
+          </div>
+        </div>
+
+        <div class="code">
+          <div class="section">
+            <h2>Test</h2>
+            <pre class="lines">1
+2
+3</pre>
+            <pre class="sunburst">      <span class="Keyword">def</span> <span class="Entity">test_code</span>
+        assert_equal <span class="Constant">1</span>, code
+      <span class="Keyword">end</span>
+</pre>
+          </div>
+        </div>

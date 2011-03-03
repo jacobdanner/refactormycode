@@ -1,0 +1,25 @@
+<h2>Edit your refactoring</h2>
+
+<div id="<%= dom_id(@refactor, :errors) %>"></div>
+
+<% remote_form_for :refactor, :url => refactor_path(@refactor.refactored_code, @refactor), :method => :put,
+                              :loading => spin = "$('#{dom_id(@refactor, :form_actions)}').toggle(); $('#{dom_id(@refactor, :spinner)}').toggle()",
+                              :complete => spin do |f| -%>
+  <p>
+    <label for="refactor_comment">Comment</label><br/>
+    <%= f.text_area :comment, :rows => 4 %>
+  </p>
+  <p>
+    <label for="refactor_code">Code</label><br/>
+    <%= f.text_area :code, :class => 'code' %>
+  </p>
+  <p id="<%= dom_id(@refactor, :form_actions) %>">
+    <%= submit_tag 'Update' %>
+    or
+    <%= link_to_remote 'Cancel', { :url => refactor_path(@refactor.refactored_code, @refactor),
+                                   :method => :get,
+                                   :loading => "Effect.BlindUp('#{dom_id(@refactor)}')" },
+                                 { :class => 'cancel' } %>
+  </p>
+  <%= image_tag 'spinner.gif', :id => dom_id(@refactor, :spinner), :style => 'display:none' %>
+<% end -%>

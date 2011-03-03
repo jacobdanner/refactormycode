@@ -1,0 +1,14 @@
+development:
+  api_key: 0fe6f2e885f0d6708cd0ddfba886a3cb
+  owner_url: http://refactormycode-dev.com
+  validate_key: false
+  
+test:
+  api_key: 0fe6f2e885f0d6708cd0ddfba886a3cb
+  owner_url: http://refactormycode-test.com
+  validate_key: false
+
+production:
+  api_key: 0549353f21a8
+  owner_url: http://refactormycode.com  
+  validate_key: false

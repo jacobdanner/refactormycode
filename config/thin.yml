@@ -1,0 +1,8 @@
+environment: production
+user: deploy
+group: www-data
+servers: 2
+socket: /tmp/thin.sock
+chdir: /var/www/refactormycode/current
+log: log/thin.log
+pid: tmp/pids/thin.pid

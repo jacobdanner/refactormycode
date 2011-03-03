@@ -1,0 +1,37 @@
+== Gravatar caching
+
+Plugin for caching Gravatar (gravatar.com) locally in your web 2.0 Rails app.
+
+Based on http://svn.hiddenloop.com/public/plugins/mephisto_gravatar_cache/ by Matthew Hutchinson
+and http://snippets.dzone.com/posts/show/2587 by Daniel Haran
+
+=== Installation
+
+  script/plugin install http://code.macournoyer.com/svn/plugins/gravatar_cache
+
+Or using piston:
+  
+  piston import http://code.macournoyer.com/svn/plugins/gravatar_cache vendor/plugins/gravatar_cache
+    
+Place something like this in your Rakefile:
+  
+  def gravatar_emails
+    User.find(:all).collect(&:email) # Return the emails you wanna cache
+  end
+
+Now put everything in place for showtime:
+
+  rake gravatar:setup
+
+=== Usage
+
+Setup a cronjob or something to periodically run:
+  
+  rake gravatar:cache
+
+Then use like this in your app:
+  
+  image_tag Gravatar.new('an@email.com').url
+
+
+Extracted from RefactorMyCode.com by Marc-Andre Cournoyer

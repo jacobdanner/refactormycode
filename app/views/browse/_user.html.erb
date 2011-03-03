@@ -1,0 +1,21 @@
+<div id="<%= dom_id(user) %>" class="badge">
+  <%= position user %>
+
+  <div class="content">  
+    <h1>
+      <%= link_to h(user.name), user_path(user) %>
+    </h1>
+  
+    <div class="info">
+      <%= pluralize user.codes.size, 'code submission' %>,
+      <%= pluralize user.refactors_count, 'refactoring' %>
+    </div>
+  
+    <div class="website">
+      <%= link_to_website user %>
+    </div>
+  </div>  
+
+  <%= avatar user %>
+  <%= image_tag 'talk.gif', :class => 'talk' %>
+</div>

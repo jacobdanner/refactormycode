@@ -1,0 +1,150 @@
+# Logfile created on Sat Feb 02 12:34:58 -0500 2008
+
+Processing BrowseController#recent_codes (for  at 2008-04-15 13:41:43) [GET]
+  Session ID: 6bde7bfcbef6b9db471510254175c822
+  Parameters: {"action"=>"recent_codes", "controller"=>"browse"}
+You really should set the acts_as_ferret :default_field option when using a shared index!
+default field list: "*"
+Rendering template within layouts/application
+Rendering browse/items
+
+
+ActionView::TemplateError (private method `chomp' called for nil:NilClass) on line #8 of layouts/application.html.erb:
+5: <head>
+6:   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+7:   <title><%=h @title %> - RefactorMyCode.com</title>
+8:   <%= stylesheet_link_merged :base %>
+9:   <%= javascript_include_merged :base %>
+10:   <%= yield :head %>
+11:   <script type="text/javascript">
+
+    vendor/plugins/asset_packager/lib/synthesis/asset_package.rb:98:in `current_file'
+    vendor/plugins/asset_packager/lib/synthesis/asset_package.rb:35:in `targets_from_sources'
+    vendor/plugins/asset_packager/lib/synthesis/asset_package.rb:33:in `each'
+    vendor/plugins/asset_packager/lib/synthesis/asset_package.rb:33:in `targets_from_sources'
+    vendor/plugins/asset_packager/lib/synthesis/asset_package_helper.rb:28:in `stylesheet_link_merged'
+    app/views/layouts/application.html.erb:8:in `_run_erb_47app47views47layouts47application46html46erb'
+    vendor/rails/actionpack/lib/action_view/base.rb:637:in `send'
+    vendor/rails/actionpack/lib/action_view/base.rb:637:in `compile_and_render_template'
+    vendor/rails/actionpack/lib/action_view/base.rb:365:in `render_template'
+    vendor/rails/actionpack/lib/action_view/base.rb:316:in `render_file'
+    vendor/rails/actionpack/lib/action_controller/layout.rb:268:in `render_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    app/controllers/browse_controller.rb:95:in `browse'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `call'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `custom'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:156:in `call'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:156:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:150:in `each'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:150:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    app/controllers/browse_controller.rb:94:in `browse'
+    app/controllers/browse_controller.rb:10:in `recent_codes'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1158:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1158:in `perform_action_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:697:in `call_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:689:in `perform_action_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    vendor/rails/actionpack/lib/action_controller/rescue.rb:199:in `perform_action_without_caching'
+    vendor/rails/actionpack/lib/action_controller/caching.rb:678:in `perform_action'
+    vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    vendor/rails/activerecord/lib/active_record/query_cache.rb:8:in `cache'
+    vendor/rails/actionpack/lib/action_controller/caching.rb:677:in `perform_action'
+    vendor/rails/actionpack/lib/action_controller/base.rb:524:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:524:in `process_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:685:in `process_without_session_management_support'
+    vendor/rails/actionpack/lib/action_controller/session_management.rb:123:in `process'
+    vendor/rails/actionpack/lib/action_controller/base.rb:388:in `process'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:171:in `handle_request'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:115:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:126:in `dispatch_cgi'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:9:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/rack/adapter/rails.rb:54:in `serve_rails'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/rack/adapter/rails.rb:74:in `call'
+    ../thin-turbo/lib/thin/backends/turbo.rb:36:in `loop!'
+    ../thin-turbo/lib/thin/backends/turbo.rb:36:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/server.rb:146:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/controllers/controller.rb:82:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:165:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:165:in `run_command'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:135:in `run!'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/bin/thin:6
+    /usr/local/bin/thin:19:in `load'
+    /usr/local/bin/thin:19
+
+
+
+Processing BrowseController#recent_codes (for  at 2008-04-15 13:41:46) [GET]
+  Session ID: 6bde7bfcbef6b9db471510254175c822
+  Parameters: {"action"=>"recent_codes", "controller"=>"browse"}
+
+
+ArgumentError (unsupported address family):
+    /usr/local/lib/ruby/1.8/ipaddr.rb:405:in `initialize'
+    /vendor/plugins/exception_notification/lib/exception_notifiable.rb:62:in `new'
+    /vendor/plugins/exception_notification/lib/exception_notifiable.rb:62:in `local_request?'
+    /vendor/rails/actionpack/lib/action_controller/rescue.rb:122:in `rescue_action'
+    /vendor/rails/actionpack/lib/action_controller/rescue.rb:203:in `perform_action_without_caching'
+    /vendor/rails/actionpack/lib/action_controller/caching.rb:678:in `perform_action'
+    /vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /vendor/rails/activerecord/lib/active_record/query_cache.rb:8:in `cache'
+    /vendor/rails/actionpack/lib/action_controller/caching.rb:677:in `perform_action'
+    /vendor/rails/actionpack/lib/action_controller/base.rb:524:in `send'
+    /vendor/rails/actionpack/lib/action_controller/base.rb:524:in `process_without_filters'
+    /vendor/rails/actionpack/lib/action_controller/filters.rb:685:in `process_without_session_management_support'
+    /vendor/rails/actionpack/lib/action_controller/session_management.rb:123:in `process'
+    /vendor/rails/actionpack/lib/action_controller/base.rb:388:in `process'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:171:in `handle_request'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:115:in `dispatch'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:126:in `dispatch_cgi'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:9:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/rack/adapter/rails.rb:54:in `serve_rails'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/rack/adapter/rails.rb:74:in `call'
+    ../thin-turbo/lib/thin/backends/turbo.rb:36:in `loop!'
+    ../thin-turbo/lib/thin/backends/turbo.rb:36:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/server.rb:146:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/controllers/controller.rb:82:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:165:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:165:in `run_command'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:135:in `run!'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/bin/thin:6
+    /usr/local/bin/thin:19:in `load'
+    /usr/local/bin/thin:19
+
+/!\ FAILSAFE /!\  Tue Apr 15 13:41:46 -0400 2008
+  Status: 500 Internal Server Error
+  unsupported address family
+    /usr/local/lib/ruby/1.8/ipaddr.rb:405:in `initialize'
+    /Users/marc/projects/refactormycode/vendor/plugins/exception_notification/lib/exception_notifiable.rb:62:in `new'
+    /Users/marc/projects/refactormycode/vendor/plugins/exception_notification/lib/exception_notifiable.rb:62:in `local_request?'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/rescue.rb:122:in `rescue_action'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/rescue.rb:203:in `perform_action_without_caching'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/caching.rb:678:in `perform_action'
+    /Users/marc/projects/refactormycode/vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /Users/marc/projects/refactormycode/vendor/rails/activerecord/lib/active_record/query_cache.rb:8:in `cache'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/caching.rb:677:in `perform_action'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/base.rb:524:in `send'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/base.rb:524:in `process_without_filters'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/filters.rb:685:in `process_without_session_management_support'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/session_management.rb:123:in `process'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/base.rb:388:in `process'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/dispatcher.rb:171:in `handle_request'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/dispatcher.rb:115:in `dispatch'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/dispatcher.rb:126:in `dispatch_cgi'
+    /Users/marc/projects/refactormycode/vendor/rails/actionpack/lib/action_controller/dispatcher.rb:9:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/rack/adapter/rails.rb:54:in `serve_rails'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/rack/adapter/rails.rb:74:in `call'
+    ../thin-turbo/lib/thin/backends/turbo.rb:36:in `loop!'
+    ../thin-turbo/lib/thin/backends/turbo.rb:36:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/server.rb:146:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/controllers/controller.rb:82:in `start'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:165:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:165:in `run_command'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/lib/thin/runner.rb:135:in `run!'
+    /usr/local/lib/ruby/gems/1.8/gems/thin-0.8.0/bin/thin:6
+    /usr/local/bin/thin:19:in `load'
+    /usr/local/bin/thin:19

@@ -1,0 +1,30 @@
+<% content_for :on_load do %>
+  $('openid_url').focus();
+<% end %>
+
+<h1><%= @title = 'Login' %></h1>
+
+<p class="comment">
+  To login you don't have to create an account or anything, just use one of your OpenID
+  account and we'll automatically create an account the first time you login.
+  <br/>
+  <span class="help">
+    <%= link_to 'What is OpenID ?', 'http://www.37signals.com/openid/', :target => '_blank' %>
+  </span>
+</p>
+
+<% form_tag session_path do -%>
+  <p>
+    <label for="openid_url">Your OpenID</label><br/>
+    <%= text_field_tag :openid_url, params[:openid_url], :size => 30 %>
+		<!-- BEGIN ID SELECTOR -->
+		<script type="text/javascript" id="__openidselector" src="https://www.idselector.com/selector/0bcecc841d1ceaa2e1bfc4f3052f7a02c702fdc9" charset="utf-8"></script>
+		<!-- END ID SELECTOR -->
+  </p>
+
+  <p>
+    <%= submit_tag 'Login' %>
+    or
+    <%= link_to 'Signup for an OpenID account', 'https://www.myopenid.com/signup', :target => '_blank' %>
+  </p>  
+<% end -%>

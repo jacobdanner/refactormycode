@@ -1,0 +1,29 @@
+<% content_for :head do %>
+  <%= auto_discovery_link_tag :atom,
+      { :controller => 'browse', :action => @controller.action_name, :format => 'atom' },
+      { :title => @title } %>
+<% end if @feed %>
+
+<% content_for :sidebar do %>
+  <ul class="languages">
+    <li>
+      <%= link_to 'All', { :controller => 'browse',
+                           :action => @controller.action_name,
+                           :language => 'all' },
+                         { :class => "lang_tab all #{'active' if ['all', nil].include?(params[:language])}" } %>
+    </li>
+  <% CodeFormatter.languages.each do |language| %>
+    <li><%= link_to language, { :controller => 'browse',
+                                :action => @controller.action_name,
+                                :language => language_css(language) },
+                              { :class => "lang_tab #{language_css language} #{'active' if params[:language] == language_css(language)}" } %></li>
+  <% end %>
+  </ul>
+<% end if @feed %>
+
+<%= render :partial => @singular, :collection => @items %>
+
+<%= will_paginate @items %>
+
+<%# Do this in the end to fix a rendering bug in Safari %>
+<%= javascript_tag "Nifty('a.lang_tab', 'right transparent');" if @feed %>

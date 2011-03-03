@@ -1,0 +1,12 @@
+<% @title = "Pastable version of #{@code.title}" %>
+<h1>Pastable version of <%= link_to h(@code.title), code_path(@code) %></h1>
+
+<% content_for :on_load do %>
+  $('code').focus();
+<% end %>
+
+<textarea rows="30" onfocus="this.select()" id="code">
+<%=h CodeFormatter.new(@code.code, @code.language).to_embeded_html %>
+<%=h link_to(image_tag("#{home_url}images/small_logo.gif", :style => 'border:0'), code_url(@code),
+            :title => 'As seen on RefactorMyCode.com',
+            :style => 'color:#fff') %></textarea>

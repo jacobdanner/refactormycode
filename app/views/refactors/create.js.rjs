@@ -1,0 +1,19 @@
+page[:new_refactor_notice].hide
+page[:new_refactor_error].hide
+
+if @refactor.spam
+  page.replace_html :new_refactor_notice, 'Your comment is awaiting review, please check back later'
+  page[:new_refactor_notice].show
+  page.visual_effect 'ScrollTo', :new_refactor_notice
+  page[:new_refactor_form].reset
+elsif @refactor.valid?
+  page.insert_html :bottom, :refactors, :partial => "refactor_div", :locals => { :refactor => @refactor }
+  page.visual_effect 'ScrollTo', dom_id(@refactor)
+  page.visual_effect 'Highlight', dom_id(@refactor), :queue => 'end'
+  page[:refactors_count].update pluralize(@code.refactors_count + 1, 'refactoring')
+  page[:no_refactoring].hide
+  page[:new_refactor_form].reset
+else
+  page[:new_refactor_error].update @refactor.errors.full_messages.to_sentence
+  page[:new_refactor_error].show
+end

@@ -1,0 +1,7 @@
+if @rating.errors.empty?
+  page.replace_html "rating_#{@refactor.id}_count", :partial => 'refactors/rating',
+                    :locals => { :refactor => @refactor, :@rating => @rating }
+  page.visual_effect 'Highlight', "rating_#{@refactor.id}_count"
+else
+  page.alert @rating.errors.full_messages.to_sentence
+end

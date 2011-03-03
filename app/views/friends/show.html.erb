@@ -1,0 +1,19 @@
+<% @title = "#{@user.name} friends" %>
+
+<% content_for :head do %>
+  <%= auto_discovery_link_tag_for_friends %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <h2>Following</h2>
+  <ul class="friends" id="friends">
+    <% @user.friends.each do |friend| %>
+      <li id="friend_<%= friend.id %>"><%= friend_avatar friend %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<% @items.each do |item| %>
+  <%= render :partial => "browse/#{item.class.name.underscore}", :object => item %>
+<% end %>

@@ -1,0 +1,51 @@
+<p>
+  <label for="code_title">Title</label><br/>
+  <%= f.text_field :title, :size => 50 %>
+</p>
+
+<p>
+  <label for="code_language">Language</label><br/>
+  <%= f.select :language, CodeFormatter.languages %>
+</p>
+
+<p>
+  <label for="code_comment">Comment</label><br/>
+  <%= f.text_area :comment, :rows => 4 %>
+</p>
+
+<p>
+  <%= link_to 'Format', code_help_path, :class => 'action', :target => '_blank' %>
+  <label for="code_code">Code</label><br/>
+  <%= f.text_area :code, :class => 'code' %>
+</p>
+
+<p>
+  <label for="code_tag_list">Tags</label><br/>
+  <%= f.text_field :tag_list %>
+  <span class="help">Seperated by commas : speed, short, rails</span>
+</p>
+<div id="tag_list" class="autocomplete"></div>
+<script type="text/javascript" charset="utf-8">
+  new Autocompleter.Local('code_tag_list', 'tag_list', <%= @tags.collect(&:name).to_json %>, {
+    tokens: ' ',
+    fullSearch: true,
+    frequency: 0,
+    minChars: 1
+  });
+</script>
+
+<p>
+  <label for="code_trackback_url">Trackback URL</label><br/>
+  <%= f.text_field :trackback_url, :size => 70 %><br/>
+  <span class="help">
+    If you specify an URL here, a <%= link_to 'trackback', 'http://en.wikipedia.org/wiki/Trackback' %>
+    will be sent to the address whenever a comment is made on this code posting.<br/>
+    The trackback URL should be ending with something like <strong>/trackback</strong>, this is not
+    the post URL.
+  </span>
+</p>
+
+<!-- <p>
+  <%= f.check_box :notify_me %>
+  <label for="code_notify_me">Notify me of new refactorings by email</label>
+</p> -->

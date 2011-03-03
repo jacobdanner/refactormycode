@@ -1,0 +1,49 @@
+<% @title = @user.name %>
+
+<% content_for :head do %>
+  <%= auto_discovery_link_tag :atom, formatted_user_url(@user, :atom), { :title => @user.name } %>
+  <%= auto_discovery_link_tag_for_friends %>
+<% end %>
+
+<div id="banner" class="user">
+  <%= avatar @user %>
+  <%= position @user %>
+  
+  <h1><%=h @user.name %></h1>
+  <div class="info">
+    <%= pluralize @user.codes.size, 'code submission' %>,
+    <%= pluralize @user.refactors.size, 'refactoring' %>,
+    <%= link_to_website @user %>
+  </div>
+  
+  <ul class="nav">
+    <% if logged_in? && current_user != @user %>
+      <li id="remove_friend" style="<%= 'display:none' unless friend?(@user) %>">
+        <%= link_to_remote_with_spinner "Stop following", { :url => user_friends_path(@user), :method => :delete }, { :class => "remove_friend" } %></li>
+      <li id="add_friend" style="<%= 'display:none' if friend?(@user) %>">
+        <%= link_to_remote_with_spinner "Follow this user", { :url => user_friends_path(@user) }, { :class => "add_friend" } %></li>
+    <% end %>
+    <li><%= link_to "Friends", user_friends_path(@user), { :class => "friends" } %></li>
+  </ul>
+</div>
+
+<% content_for :sidebar do %>
+  <h2><%= link_to "Following", user_friends_path(@user) %></h2>
+  <ul class="friends" id="friends">
+    <% @user.friends.each do |friend| %>
+      <li id="friend_<%= friend.id %>"><%= friend_avatar friend %></li>
+    <% end %>
+  </ul>
+  <h2>Followers</h2>
+  <ul class="friends" id="fans">
+    <% @user.fans.each do |friend| %>
+      <li id="fan_<%= friend.id %>"><%= friend_avatar friend %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% cache do %>
+  <% @items.each do |item| %>
+    <%= render :partial => "browse/#{item.class.name.underscore}", :object => item %>
+  <% end %>
+<% end %>

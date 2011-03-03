@@ -1,0 +1,7 @@
+<% @title = "Search results for '#{@query}'" %>
+
+<% @items.each do |item| %>
+  <%= render :partial => item.class.name.underscore, :object => item %>
+<% end %>
+
+<%= will_paginate @items %>

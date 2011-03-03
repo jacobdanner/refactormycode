@@ -1,0 +1,9 @@
+if @success
+  page.insert_html :bottom, :fans, %{<li id="fan_#{current_user.id}">#{friend_avatar(current_user)}</li>}
+  page.visual_effect :highlight, "fan_#{current_user.id}"
+  page[:add_friend].hide
+  page[:remove_friend].show
+else
+  page.alert @friendship.errors.full_messages.to_sentence
+end
+
