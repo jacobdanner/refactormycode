@@ -1,11 +1,11 @@
-require 'uv'
+#require 'uv'
 
 class CodeFormatter
   cattr_reader :languages
   @@languages = %w(Ruby PHP JavaScript ActionScript Java C C++ C# VB.NET Python Perl Lisp Erlang Haskell Bash Delphi).sort
   
   cattr_reader :syntaxes
-  @@syntaxes = Uv.syntaxes.sort
+  @@syntaxes = []#Uv.syntaxes.sort
   
   def initialize(code, language)
     @code = code
@@ -23,14 +23,15 @@ class CodeFormatter
   end
     
   def valid_syntax?(syntax)
-    self.class.syntaxes.include? syntax
+    #self.class.syntaxes.include? syntax
+    true
   end
   
   def to_html(options={})
     return '' if @code.blank?
     
     split_in_sections.collect do |section|
-      formatted_code = Uv.parse(section.code, 'xhtml', section.syntax, false, 'sunburst')
+      formatted_code = section.code #Uv.parse(section.code, 'xhtml', section.syntax, false, 'sunburst')
       lines = (1..section.code.split("\n").size).to_a.join("\n")
 
       <<-EOS
