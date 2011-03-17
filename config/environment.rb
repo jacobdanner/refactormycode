@@ -55,4 +55,12 @@ Rails::Initializer.run do |config|
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory is automatically loaded
 
+
+  config.gem 'god', :version => '0.7.14'
+  config.gem 'json', :version => '1.1.1'
+  config.gem 'mysql', :version => '2.8.1'
+  config.gem 'rails', :version => '2.0.2'
+  config.gem 'ruby-openid', :version => '2.1.7'
+  config.gem 'ruby-yadis', :version => '0.3.4'
+  config.gem 'plist', :version => '3.0.0'
 end
