@@ -1,11 +1,9 @@
-#require 'uv'
-
 class CodeFormatter
   cattr_reader :languages
   @@languages = %w(Ruby PHP JavaScript ActionScript Java C C++ C# VB.NET Python Perl Lisp Erlang Haskell Bash Delphi).sort
   
   cattr_reader :syntaxes
-  @@syntaxes = []#Uv.syntaxes.sort
+  @@syntaxes = @@languages
   
   def initialize(code, language)
     @code = code
@@ -23,29 +21,20 @@ class CodeFormatter
   end
     
   def valid_syntax?(syntax)
-    #self.class.syntaxes.include? syntax
-    true
+    self.class.syntaxes.include? syntax
   end
   
   def to_html(options={})
     return '' if @code.blank?
     
-    split_in_sections.collect do |section|
-      formatted_code = section.code #Uv.parse(section.code, 'xhtml', section.syntax, false, 'sunburst')
-      lines = (1..section.code.split("\n").size).to_a.join("\n")
+    html_escapes = { '&' => '&amp;', '"' => '&quot;', '>' => '&gt;', '<' => '&lt;' }
+    html_forbidden = html_escapes.keys
 
-      <<-EOS
-        <div class="code">
-          <div class="section">
-            #{'<h2>' + section.title + '</h2>' if section.title && options[:no_title].nil?}
-            <pre class="lines">#{lines}</pre>
-            #{formatted_code}
-          </div>
-        </div>
-      EOS
+    split_in_sections.collect do |section|
+      "<pre language='#{section.syntax}'>" + section.code.gsub(/[#{html_forbidden}]/) { |c| html_escapes[c] }.strip + "</pre>"
     end.join("\n")
   end
-  
+
   def to_embeded_html
     classes = {
       :code => 'overflow:auto;border:solid 1px #ccc;background:#000;color:#F8F8F8',
