@@ -16,3 +16,4 @@ config.action_controller.asset_host                  = "http://assets.refactormy
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
+config.action_mailer.delivery_method = :test
