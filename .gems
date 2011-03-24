@@ -5,3 +5,4 @@ rails         --version 2.0.2
 ruby-openid   --version 2.1.7
 ruby-yadis    --version 0.3.4
 plist         --version 3.0.0
+pg
