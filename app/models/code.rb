@@ -43,7 +43,14 @@ class Code < ActiveRecord::Base
   end
   
   def self.popular_sql_order
-    "DATE_FORMAT(codes.created_at, '%x%v') desc, codes.refactors_count desc"
+    case connection.adapter_name
+    when /MySQL/
+      "DATE_FORMAT(codes.created_at, '%x%m') desc, codes.refactors_count desc"
+    when /PostgreSQL/
+      "to_char(codes.created_at, 'YYYYMM') desc, codes.refactors_count desc"
+    else
+      '1'
+    end
   end
   
   def self.search(text, options={})
