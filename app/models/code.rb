@@ -1,5 +1,5 @@
 class Code < ActiveRecord::Base
-  has_many :refactors, :conditions => 'spam = 0', :dependent => :destroy
+  has_many :refactors, :conditions => { :spam => false }, :dependent => :destroy
   belongs_to :user
   
   has_permalink :title
@@ -25,7 +25,7 @@ class Code < ActiveRecord::Base
   def to_param
     "#{id}-#{permalink}"
   end
-  
+
   def user_name
     user.name
   end
