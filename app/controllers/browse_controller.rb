@@ -23,7 +23,7 @@ class BrowseController < ApplicationController
   def recent_refactors
     browse :refactors, :title => "Recent #{language_title} refactorings",
                        :order => 'refactors.created_at desc',
-                       :conditions => language_conditions('refactors.spam = 0'),
+                       :conditions => language_conditions('refactors.spam = false'),
                        :include => :refactored_code
   end
   

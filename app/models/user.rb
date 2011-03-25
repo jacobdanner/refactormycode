@@ -1,7 +1,7 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :codes
-  has_many :refactors, :conditions => 'spam = 0'
+  has_many :refactors, :conditions => { :spam => false }
   has_many :ratings
   has_many :friendships
   has_many :friends, :through => :friendships, :class_name => "User"
