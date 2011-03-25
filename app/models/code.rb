@@ -1,5 +1,5 @@
 class Code < ActiveRecord::Base
-  has_many :refactors, :conditions => 'spam = 0', :dependent => :destroy
+  has_many :refactors, :conditions => Code.refactor_not_spam, :dependent => :destroy
   belongs_to :user
   
   has_permalink :title
@@ -24,6 +24,17 @@ class Code < ActiveRecord::Base
   
   def to_param
     "#{id}-#{permalink}"
+  end
+
+  def self.refactor_not_spam
+    case connection.adapter_name
+    when /MySQL/
+      'spam = 0'
+    when /PostgreSQL/
+      'spam = false'
+    else
+      'true'
+    end
   end
   
   def user_name
