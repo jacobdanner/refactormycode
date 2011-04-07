@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Safeway::Application.load_tasks
+RefactorMyCode::Application.load_tasks

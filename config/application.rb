@@ -8,8 +8,9 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module RefactorMyCode
   class Application < Rails::Application
-  
-    config.action_view.javascript_expansions[:defaults] = %w(jquery.min rails)
+
+    config.action_view.javascript_expansions[:base] = %w(application prototype effects dragdrop controls cookie json flash rating corners)
+    config.action_view.stylesheet_expansions[:base] = %w(scaffold application code corners)
 
     # config.active_record.observers = [:notification_observer, :karma_observer, :safeway_bucks_observer, :badge_observer]
     # Settings in config/environments/* take precedence over those specified here.
@@ -41,5 +42,8 @@ module RefactorMyCode
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    config.session_store :cookie_store, :key => '_refactormycode_session'
+    config.secret_token = '560912dbeb84f8b2bd7c6ba92d775f676d82ef2c595351b1a11c3d13b7820063c774428ec5c787abd43e56f06935a5067692c84cdbec088f7f42fd8c00e55a4d'
   end
 end
