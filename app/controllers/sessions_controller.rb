@@ -23,12 +23,18 @@ class SessionsController < ApplicationController
   protected
 
   def open_id_authentication(openid_url)
-    authenticate_with_open_id(openid_url, :required => [:nickname, :email]) do |result, identity_url, registration|
-      if result.successful?
-        self.current_user = User.find_or_create_by_identity_url(identity_url, registration.data)
-        successful_login
-      else
-        failed_login result.message
+    if Rails.env.development?
+      self.current_user = User.first
+      successful_login
+    else
+      # the below code should be updated to omniauth.
+      authenticate_with_open_id(openid_url, :required => [:nickname, :email]) do |result, identity_url, registration|
+        if result.successful?
+          self.current_user = User.find_or_create_by_identity_url(identity_url, registration.data)
+          successful_login
+        else
+          failed_login result.message
+        end
       end
     end
   rescue OpenIdAuthentication::InvalidOpenId => e

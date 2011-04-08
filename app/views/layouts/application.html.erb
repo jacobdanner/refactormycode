@@ -47,14 +47,14 @@
     </a>
   </h1>
   
-  <ul id="menu" class="<%= @controller.action_name %>">
+  <ul id="menu" class="<%= controller.action_name %>">
     <%= menu_item :codes, 'Codes', home_path, :class => 'first' %>
     <%= menu_item :refactorings, 'Refactorings', recent_refactors_path %>
     <%= menu_item :popular, 'Popular', popular_codes_path %>
     <%= menu_item :best, 'Best', best_refactorers_path %>
     <%= menu_item :submit, 'Submit', new_code_path %>
-    <%= menu_item :spam, 'Spam', "spam_path", :class => 'if_admin', :style => 'display:none' %>
-    <%= menu_item :account, 'Account', "account_path", :class => 'if_logged_in', :style => 'display:none' %>
+    <%= menu_item :spam, 'Spam', spam_path, :class => 'if_admin', :style => 'display:none' %>
+    <%= menu_item :account, 'Account', account_path, :class => 'if_logged_in', :style => 'display:none' %>
     <%= menu_item :logout, 'Logout', logout_path, :class => 'if_logged_in', :style => 'display:none' %>
     <%= menu_item :login, 'Login', login_path, :class => 'unless_logged_in' %>
   </ul>
@@ -97,7 +97,7 @@
 </div>
 
 <div id="footer">
-  <%= link_to 'API', "api_help_path" %>,
+  <%= link_to 'API', api_help_path %>,
   <%= link_to 'Follow us on Twitter for updates', 'http://twitter.com/intridea' %>,
   <%= mail_to 'refactormycode@intridea.com', 'E-mail us', :encode => "javascript" %>
   

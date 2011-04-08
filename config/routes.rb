@@ -7,6 +7,8 @@ RefactorMyCode::Application.routes.draw do
   match "login", :to => "sessions#new", :as => :login
   match "logout", :to => "sessions#destroy", :as => :logout
   
+  match "spam", :to => "refactors#index", :as => :spam
+  match "api/help", :to => "help#api", :as => :api_help
   
   resources "browse" do
     collection do
@@ -32,4 +34,6 @@ RefactorMyCode::Application.routes.draw do
   end
   
   resources "sessions", "accounts", "badges", "friends", "users", "help", "tags"
+  
+  resource :session, :account
 end
