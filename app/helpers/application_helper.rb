@@ -43,8 +43,8 @@ module ApplicationHelper
       end
       options[:complete] = "$('#{spinner}').hide(); " + (options[:complete] || "$('#{container_id}').show()")
       
-      out << link_to_remote(title, { :loading => "$('#{container_id}').hide(); $('#{spinner}').show()" }.merge(options),
-                                   { :id => element_id }.merge(html_options))
+      out << link_to(title, { :loading => "$('#{container_id}').hide(); $('#{spinner}').show()" }.merge(options),
+                            { :id => element_id }.merge(html_options), :remote => true)
     end
   end
   

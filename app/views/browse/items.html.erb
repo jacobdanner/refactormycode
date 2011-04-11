@@ -1,6 +1,6 @@
 <% content_for :head do %>
   <%= auto_discovery_link_tag :atom,
-      { :controller => 'browse', :action => @controller.action_name, :format => 'atom' },
+      { :controller => 'browse', :action => action_name, :format => 'atom' },
       { :title => @title } %>
 <% end if @feed %>
 
@@ -14,7 +14,7 @@
     </li>
   <% CodeFormatter.languages.each do |language| %>
     <li><%= link_to language, { :controller => 'browse',
-                                :action => @controller.action_name,
+                                :action => action_name,
                                 :language => language_css(language) },
                               { :class => "lang_tab #{language_css language} #{'active' if params[:language] == language_css(language)}" } %></li>
   <% end %>

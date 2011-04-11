@@ -1,8 +1,8 @@
 <div id="new_refactor_notice" class="notice" style="display:none"></div>
-<% remote_form_for :refactor, :url => refactors_path(@code),
+<% form_for :refactor, :url => refactors_path(@code),
                               :loading => "$('new_refactor_actions').hide(); $('new_refactor_spinner').show()",
                               :complete => "$('new_refactor_actions').show(); $('new_refactor_spinner').hide()",
-                              :html => { :id => 'new_refactor_form' } do |f| -%>
+                              :html => { :id => 'new_refactor_form' }, :remote => true do |f| -%>
   <% if logged_in? %>
     <div class="action">
       Logged in as <%= link_to h(current_user.name), user_path(current_user) %>,

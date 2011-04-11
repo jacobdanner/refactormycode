@@ -9,27 +9,31 @@ RefactorMyCode::Application.routes.draw do
   
   match "spam", :to => "refactors#index", :as => :spam
   match "api/help", :to => "help#api", :as => :api_help
+  match "code/help", :to => "help#code", :as => :code_help
+  
+  match 'refactorers/best/(:page)', :to => 'browse#best_refactorers', :as => :best_refactorers
   
   resources "browse" do
     collection do
       get "recent_codes"
+      get "popular_codes"
       get "best_refactorers"
+      get "recent_refactors"
       get "search"
     end
   end
   
-  match 'refactorers/best/(:page)', :to => 'browse#best_refactorers', :as => :best_refactorers
-  
-  resources "refactors" do
-    collection do
-      get "recent"
-      get "best"
+  resources "codes" do
+    member do
+      get "follow"
+      get "pastable"
     end
   end
   
-  resources "codes" do
-    collection do
-       get "popular"
+  resources "refactors" do
+    member do
+      post "mark_as_spam"
+      post "rate"
     end
   end
   

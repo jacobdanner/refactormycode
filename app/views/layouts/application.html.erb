@@ -49,9 +49,9 @@
   
   <ul id="menu" class="<%= controller.action_name %>">
     <%= menu_item :codes, 'Codes', home_path, :class => 'first' %>
-    <%= menu_item :refactorings, 'Refactorings', recent_refactors_path %>
-    <%= menu_item :popular, 'Popular', popular_codes_path %>
-    <%= menu_item :best, 'Best', best_refactorers_path %>
+    <%= menu_item :refactorings, 'Refactorings', recent_refactors_browse_index_path %>
+    <%= menu_item :popular, 'Popular', popular_codes_browse_index_path %>
+    <%= menu_item :best, 'Best', best_refactorers_browse_index_path %>
     <%= menu_item :submit, 'Submit', new_code_path %>
     <%= menu_item :spam, 'Spam', spam_path, :class => 'if_admin', :style => 'display:none' %>
     <%= menu_item :account, 'Account', account_path, :class => 'if_logged_in', :style => 'display:none' %>

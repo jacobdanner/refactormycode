@@ -1,8 +1,8 @@
 <%= avatar refactor.user || refactor.user_email %>
 
 <div class="side_actions">
-  <%= link_to_remote 'Edit', :url => edit_refactor_path(@code, refactor), :method => :get,
-                             :loading => "new Effect.BlindUp('#{dom_id(refactor)}')" if author_of_refactor?(refactor) %>
+  <%= link_to 'Edit', :url => edit_refactor_path(@code, refactor), :method => :get,
+                             :loading => "new Effect.BlindUp('#{dom_id(refactor)}')", :remote => true if author_of_refactor?(refactor) %>
   <% if author_of_code? %>
     <%= link_to_remote_with_spinner 'Delete', :url => refactor_path(@code, refactor),
                                               :confirm => 'Are you sure?', :method => :delete,

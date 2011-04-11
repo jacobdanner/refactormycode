@@ -1,6 +1,6 @@
 module Defensio
   mattr_accessor :config_file
-  self.config_file = RAILS_ROOT + '/config/defensio.yml'
+  self.config_file = Rails.root.to_s + '/config/defensio.yml'
   
   module ActsAs
     module ClassMethods
@@ -86,7 +86,7 @@ module Defensio
       
       def defensio_options=(options)
         @defensio_options = {}
-        @defensio_options.merge! File.open(Defensio.config_file) { |file| YAML.load(file) }[ENV['RAILS_ENV']] if File.exists?(Defensio.config_file)
+        @defensio_options.merge! File.open(Defensio.config_file) { |file| YAML.load(file) }[Rails.env] if File.exists?(Defensio.config_file)
         @defensio_options.merge! options
         @defensio_options.symbolize_keys!
       end
