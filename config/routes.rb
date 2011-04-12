@@ -12,6 +12,7 @@ RefactorMyCode::Application.routes.draw do
   match "code/help", :to => "help#code", :as => :code_help
   
   match 'refactorers/best/(:page)', :to => 'browse#best_refactorers', :as => :best_refactorers
+  match "tags/:tags/(:language)", :to => "browse#tags", :as => :tags
   
   resources "browse" do
     collection do
@@ -37,7 +38,7 @@ RefactorMyCode::Application.routes.draw do
     end
   end
   
-  resources "sessions", "accounts", "badges", "friends", "users", "help", "tags"
+  resources "sessions", "accounts", "badges", "friends", "users", "help"
   
   resource :session, :account
 end
