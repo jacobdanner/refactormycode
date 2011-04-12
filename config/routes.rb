@@ -14,6 +14,8 @@ RefactorMyCode::Application.routes.draw do
   match 'refactorers/best/(:page)', :to => 'browse#best_refactorers', :as => :best_refactorers
   match "tags/:tags/(:language)", :to => "browse#tags", :as => :tags
   
+  post 'spam', :to => 'refactors#destroy_all_spam', :as => :destroy_all_spam
+  
   resources "browse" do
     collection do
       get "recent_codes"

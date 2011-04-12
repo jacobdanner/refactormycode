@@ -1,7 +1,7 @@
 <% @title = "Edit #{@code.title}" %>
 <h1><%=h @title %></h1>
 
-<%= error_messages_for :code %>
+<%#= error_messages_for :code %>
 
 <% form_for :code, :url => code_path(@code), :html => { :method => :put } do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>

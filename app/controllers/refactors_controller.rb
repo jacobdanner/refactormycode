@@ -11,9 +11,7 @@ class RefactorsController < ApplicationController
   
   # TODO move this to BrowseController#spam ?
   def index
-    @refactors = Refactor.paginate :per_page => 25, :page => params[:page],
-                                   :conditions => 'spam = 1',
-                                   :order => 'spaminess'
+    @refactors = Refactor.where("spam = '1'").order("spaminess DESC").page(params[:page]).per(25)
   end
   
   def show
