@@ -8,7 +8,7 @@
   <ul class="languages">
     <li>
       <%= link_to 'All', { :controller => 'browse',
-                           :action => @controller.action_name,
+                           :action => action_name,
                            :language => 'all' },
                          { :class => "lang_tab all #{'active' if ['all', nil].include?(params[:language])}" } %>
     </li>
@@ -23,7 +23,7 @@
 
 <%= render :partial => @singular, :collection => @items %>
 
-<%= will_paginate @items %>
+<%= paginate @items %>
 
 <%# Do this in the end to fix a rendering bug in Safari %>
 <%= javascript_tag "Nifty('a.lang_tab', 'right transparent');" if @feed %>

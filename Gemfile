@@ -7,3 +7,4 @@ gem 'ruby-openid'
 # gem 'jakewendt-simply_helpful'
 gem 'pg'
 # gem 'defensio'
+gem "kaminari"

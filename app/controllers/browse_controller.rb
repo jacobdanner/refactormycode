@@ -9,22 +9,19 @@ class BrowseController < ApplicationController
   def recent_codes
     browse :codes, :title => "Recent #{language_title} codes",
                    :order => 'created_at desc',
-                   :conditions => language_conditions,
-                   :include => :user
+                   :conditions => language_conditions
   end
   
   def popular_codes
     browse :codes, :title => "Popular #{language_title} codes",
                    :order => Code.popular_sql_order,
-                   :conditions => language_conditions,
-                   :include => :user
+                   :conditions => language_conditions
   end
   
   def recent_refactors
     browse :refactors, :title => "Recent #{language_title} refactorings",
                        :order => 'refactors.created_at desc',
-                       :conditions => language_conditions('refactors.spam = false'),
-                       :include => :refactored_code
+                       :conditions => language_conditions('refactors.spam = false')
   end
   
   def best_refactorers
@@ -86,7 +83,8 @@ class BrowseController < ApplicationController
       page        = params[:page].to_i
       page        = 1 if page == 0
 
-      records = model_class.paginate({ :per_page => PER_PAGE, :page => page }.merge(options))
+      # records = model_class.papaginate({ :per_page => PER_PAGE, :page => page }.merge(options))
+      records = model_class.where(options[:conditions]).order(options[:order]).page(page).per(PER_PAGE)
       @items  = records
       instance_variable_set :"@#{@plural}", records
       
