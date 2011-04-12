@@ -32,7 +32,7 @@ class CodeFormatter
 
     split_in_sections.collect do |section|
       "<pre language='#{section.syntax}'>" + section.code.gsub(/[#{html_forbidden}]/) { |c| html_escapes[c] }.strip + "</pre>"
-    end.join("\n")
+    end.join("\n").html_safe
   end
 
   def to_embeded_html

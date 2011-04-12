@@ -36,16 +36,16 @@ module ApplicationHelper
     element_id = options.delete(:id) || ('link_to_' + title.underscore.tr(' ', '_'))
     container_id = options.delete(:container_id) || element_id
     
-    returning '' do |out|
-      unless spinner = options.delete(:spinner)
-        spinner = "#{element_id}_spinner"
-        out << image_tag('spinner.gif', :id => spinner, :class => 'spinner', :style => 'display:none')
-      end
-      options[:complete] = "$('#{spinner}').hide(); " + (options[:complete] || "$('#{container_id}').show()")
-      
-      out << link_to(title, { :loading => "$('#{container_id}').hide(); $('#{spinner}').show()" }.merge(options),
-                            { :id => element_id }.merge(html_options), :remote => true)
+    out = ""
+    unless spinner = options.delete(:spinner)
+      spinner = "#{element_id}_spinner"
+      out << image_tag('spinner.gif', :id => spinner, :class => 'spinner', :style => 'display:none')
     end
+    options[:complete] = "$('#{spinner}').hide(); " + (options[:complete] || "$('#{container_id}').show()")
+    
+    out << link_to(title, { :loading => "$('#{container_id}').hide(); $('#{spinner}').show()" }.merge(options),
+                          { :id => element_id }.merge(html_options), :remote => true)
+    out.html_safe
   end
   
   def markup(text)
