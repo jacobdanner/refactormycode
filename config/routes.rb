@@ -38,7 +38,11 @@ RefactorMyCode::Application.routes.draw do
     end
   end
   
-  resources "sessions", "accounts", "badges", "friends", "users", "help"
+  resources "users" do
+    resources "friend"
+  end
+  
+  resources "sessions", "accounts", "badges","help"
   
   resource :session, :account
 end
