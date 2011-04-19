@@ -34,8 +34,8 @@
   <div class="comment">
     <%= markup @code.comment %>
   </div>
-
-  <%= format_code @code.code, @code.language %>
+  <%= CodeRay.scan(@code.code, @code.language.downcase).div.html_safe %>
+  <%#= format_code @code.code, @code.language %>
   <div id="unformated_code" style="display:none"><%=h @code.code %></div>
 <% end %>
 

@@ -8,3 +8,5 @@ gem 'ruby-openid'
 gem 'pg'
 # gem 'defensio'
 gem "kaminari"
+gem "omniauth"
+gem "coderay"
