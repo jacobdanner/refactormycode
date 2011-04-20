@@ -48,7 +48,7 @@ RefactorMyCode::Application.routes.draw do
   
   resource :session, :account
   
-  match '/auth/:service/callback' => 'services#create' 
-  resources :services, :only => [:index, :create, :destroy]
+  match '/auth/:service/callback' => 'authentications#create' 
+  resources :authentications, :only => [:index, :create, :destroy]
   
 end
