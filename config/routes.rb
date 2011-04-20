@@ -48,7 +48,19 @@ RefactorMyCode::Application.routes.draw do
   
   resource :session, :account
   
-  match '/auth/:service/callback' => 'authentications#create' 
-  resources :authentications, :only => [:index, :create, :destroy]
+  # omniauth configuration
+  match "/signin" => "authentications#signin"
+  match "/signout" => "authentications#signout"
+  match '/auth/:service/callback' => 'authentications#create'
+  match '/auth/failure' => 'authentications#failure'
+  resources :authentications, :only => [:index, :create, :destroy] do
+    collection do
+      get 'signin'
+      get 'signout'
+      get 'signup'
+      post 'newaccount'
+      get 'failure'
+    end
+  end
   
 end

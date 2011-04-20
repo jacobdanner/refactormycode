@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships, :class_name => "User"
   has_many :authentications
   
-  validates_presence_of :identity_url
+  # validates_presence_of :identity_url
   
   attr_protected :admin, :rating, :refactors_count
   
