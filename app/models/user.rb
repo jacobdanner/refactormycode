@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :ratings
   has_many :friendships
   has_many :friends, :through => :friendships, :class_name => "User"
+  has_many :authentications
   
   validates_presence_of :identity_url
   
