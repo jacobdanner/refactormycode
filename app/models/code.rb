@@ -16,7 +16,7 @@ class Code < ActiveRecord::Base
   # acts_as_ferret :fields => [:title, :comment, :code, :language, :tag_list],
   #                :single_index => true
 
-  acts_as_taggable
+  acts_as_taggable_on :tags
   
   attr_protected :user_id, :user
   

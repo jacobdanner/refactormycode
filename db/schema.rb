@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110420045837) do
+ActiveRecord::Schema.define(:version => 20110501032904) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -94,6 +94,9 @@ ActiveRecord::Schema.define(:version => 20110420045837) do
     t.integer  "taggable_id"
     t.string   "taggable_type"
     t.datetime "created_at"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
   end
 
   create_table "tags", :force => true do |t|

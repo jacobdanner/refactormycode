@@ -32,11 +32,10 @@ class BrowseController < ApplicationController
   
   def tags
     @tags = params[:tags]
-    browse :codes, Code.find_options_for_find_tagged_with(@tags,
-                     :title => "Codes tagged with #{@tags}",
+    browse :codes,   :title => "Codes tagged with #{@tags}",
                      :order => 'created_at desc',
                      :conditions => language_conditions
-                   )
+                   
                    
   end
   
@@ -84,9 +83,12 @@ class BrowseController < ApplicationController
       page        = 1 if page == 0
 
       # records = model_class.papaginate({ :per_page => PER_PAGE, :page => page }.merge(options))
-      records = model_class.where(options[:conditions]).order(options[:order]).page(page).per(PER_PAGE)
-      @items  = records
-      instance_variable_set :"@#{@plural}", records
+      unless @tags.blank?
+        @items = Code.tagged_with(@tags, :any => true).where(options[:conditions]).order(options[:order]).page(page).per(PER_PAGE)
+      end
+      @items ||= model_class.where(options[:conditions]).order(options[:order]).page(page).per(PER_PAGE)
+      # @items  = records
+      instance_variable_set :"@#{@plural}", @items
       
       serializer_options = { :include => :user,
                              :except => [:user_email, :signature, :spam, :spaminess,
