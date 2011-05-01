@@ -5,7 +5,7 @@ class Rating < ActiveRecord::Base
   validates_presence_of   :value, :user_id
   validates_uniqueness_of :user_id, :scope => :refactor_id, :on => :create,
                           :message => "has already rated this refactoring"
-  validate_on_create      :validate_not_owner
+  validate      :validate_not_owner, :on => :create
   
   after_create :cache_rating
   
