@@ -35,15 +35,14 @@ module RefactorMyCode
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.action_view.javascript_expansions[:defaults] = %w()
+    config.generators do |g| 
+         g.test_framework :rspec 
+    end
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
-    config.session_store :cookie_store, :key => '_refactormycode_session'
-    config.secret_token = '560912dbeb84f8b2bd7c6ba92d775f676d82ef2c595351b1a11c3d13b7820063c774428ec5c787abd43e56f06935a5067692c84cdbec088f7f42fd8c00e55a4d'
   end
 end
