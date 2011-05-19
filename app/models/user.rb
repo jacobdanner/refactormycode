@@ -72,6 +72,6 @@ class User < ActiveRecord::Base
   
   private
     def generate_missing_name
-      self.name = identity_url.sub('http://', '') if name.blank?
+      self.name = self.authentications.map(&:uname).compact.first if name.blank?
     end
 end

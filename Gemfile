@@ -12,6 +12,7 @@ gem "kaminari"
 gem "omniauth"
 gem "coderay"
 gem "acts-as-taggable-on"
+gem "meta_search"
 
 group :development, :test do
   gem 'ruby-debug'
