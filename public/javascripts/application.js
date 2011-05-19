@@ -1,33 +1,3 @@
-var CurrentUser = {
-  loggedIn: false,
-  author: false,
-  admin: false,
-  
-  init: function() {
-    this.loggedIn = Cookie.get('token') != null;
-    this.admin    = Cookie.get('admin') != null;
-  }  
-};
-
-var Application = {
-  init: function() {
-    CurrentUser.init();
-  },
-  
-  onBodyLoaded: function() {
-    if (CurrentUser.loggedIn) {
-      $$('.if_logged_in').invoke('show');
-      $$('.unless_logged_in').invoke('hide');
-    }
-    if (CurrentUser.admin) {
-      $$('.if_admin').invoke('show');
-    }
-    if (CurrentUser.author) {
-      $$('.author_only').invoke('show');
-    }
-  }
-};
-
 var DateHelper = {
   // Source: http://nullstyle.com/2007/6/3/caching-time_ago_in_words
   timeAgoInWords: function(from) {

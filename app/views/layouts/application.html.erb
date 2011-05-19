@@ -54,10 +54,15 @@
     <%= menu_item :popular, 'Popular', popular_codes_browse_index_path %>
     <%= menu_item :best, 'Best', best_refactorers_browse_index_path %>
     <%= menu_item :submit, 'Submit', new_code_path %>
-    <%= menu_item :spam, 'Spam', spam_path, :class => 'if_admin', :style => 'display:none' %>
-    <%= menu_item :account, 'Account', account_path, :class => 'if_logged_in', :style => 'display:none' %>
-    <%= menu_item :logout, 'Logout', logout_path, :class => 'if_logged_in', :style => 'display:none' %>
-    <%= menu_item :login, 'Login', login_path, :class => 'unless_logged_in' %>
+	<% if current_user.admin? -%>
+	    <%= menu_item :spam, 'Spam', spam_path %>
+	<% end -%>
+	<% if current_user -%>
+    	<%= menu_item :account, 'Account', account_path %>
+    	<%= menu_item :logout, 'Logout', logout_path %>
+	<% else -%>
+    	<%= menu_item :login, 'Login', login_path %>
+ 	<% end -%>
   </ul>
   
   <noscript>
