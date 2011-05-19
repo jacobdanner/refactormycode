@@ -4,8 +4,8 @@ RefactorMyCode::Application.routes.draw do
   match "/", :to => "browse#recent_codes", :as => :home
   match "search", :to => "browse#search", :as => :search
   
-  match "login", :to => "sessions#new", :as => :login
-  match "logout", :to => "sessions#destroy", :as => :logout
+  # match "login", :to => "sessions#new", :as => :login
+  # match "logout", :to => "sessions#destroy", :as => :logout
   
   match "spam", :to => "refactors#index", :as => :spam
   match "api/help", :to => "help#api", :as => :api_help
@@ -49,8 +49,8 @@ RefactorMyCode::Application.routes.draw do
   resource :session, :account
   
   # omniauth configuration
-  match "/signin" => "authentications#signin"
-  match "/signout" => "authentications#signout"
+  match "/login" => "authentications#signin", :as => :login
+  match "/logout" => "authentications#signout", :as => :logout
   match '/auth/:service/callback' => 'authentications#create'
   match '/auth/failure' => 'authentications#failure'
   resources :authentications, :only => [:index, :create, :destroy] do
