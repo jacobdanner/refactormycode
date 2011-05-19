@@ -16,6 +16,10 @@ RefactorMyCode::Application.routes.draw do
   
   post 'spam', :to => 'refactors#destroy_all_spam', :as => :destroy_all_spam
   
+  match 'user/:user_id/friends', :to => 'friends#show', :as => :user_friends
+  post  'user/add_friend/:user_id', :to => 'friends#create', :as => :add_friend
+  delete 'user/remove_friend/:user_id', :to => 'friends#destroy', :as => :remove_friend
+  
   resources "browse" do
     collection do
       get "recent_codes"
@@ -40,9 +44,7 @@ RefactorMyCode::Application.routes.draw do
     end
   end
   
-  resources "users" do
-    resources "friend"
-  end
+  resources "users", :only => [:show]
   
   resources "sessions", "accounts", "badges","help"
   

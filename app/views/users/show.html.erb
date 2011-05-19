@@ -19,16 +19,16 @@
   <ul class="nav">
     <% if logged_in? && current_user != @user %>
       <li id="remove_friend" style="<%= 'display:none' unless friend?(@user) %>">
-        <%= link_to_remote_with_spinner "Stop following", { :url => user_friend_path(@user), :method => :delete }, { :class => "remove_friend" } %></li>
+        <%= link_to "Stop following", remove_friend_path(@user), {:method => "DELETE", :class => "remove_friend"} %></li>
       <li id="add_friend" style="<%= 'display:none' if friend?(@user) %>">
-        <%= link_to_remote_with_spinner "Follow this user", { :url => user_friend_index_path(@user) }, { :class => "add_friend" } %></li>
+        <%= link_to "Follow this user", add_friend_path(@user), {:method => "POST", :class => "add_friend"} %></li>
     <% end %>
-    <li><%= link_to "Friends", user_friend_index_path(@user), { :class => "friends" } %></li>
+    <li><%= link_to "Friends", user_friends_path(@user), { :class => "friends" } %></li>
   </ul>
 </div>
 
 <% content_for :sidebar do %>
-  <h2><%= link_to "Following", user_friend_index_path(@user) %></h2>
+  <h2><%= link_to "Following", add_friend_path(@user), :method => :post %></h2>
   <ul class="friends" id="friends">
     <% @user.friends.each do |friend| %>
       <li id="friend_<%= friend.id %>"><%= friend_avatar friend %></li>

@@ -10,17 +10,16 @@ class FriendsController < ApplicationController
   
   def create
     @friendship = current_user.friendships.build(:friend => @user)
-    
     @success = @friendship.save
     
-    respond_to :js
+    redirect_to :back
   end
   
   def destroy
     @friendships = current_user.friendships.find_by_friend_id(@user) || raise(ActiveRecord::RecordNotFound, "Not in friendship")
     @friendships.destroy
     
-    respond_to :js
+    redirect_to :back
   end
   
   private

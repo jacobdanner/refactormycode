@@ -9,8 +9,8 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 module RefactorMyCode
   class Application < Rails::Application
 
-    config.action_view.javascript_expansions[:base] = %w(application rails jquery cookie json flash rating corners)
-    config.action_view.stylesheet_expansions[:base] = %w(scaffold application code corners)
+    config.action_view.javascript_expansions[:default] = %w(jquery cookie json flash rating corners rails application)
+    config.action_view.stylesheet_expansions[:default] = %w(scaffold application code corners)
 
     # config.active_record.observers = [:notification_observer, :karma_observer, :safeway_bucks_observer, :badge_observer]
     # Settings in config/environments/* take precedence over those specified here.

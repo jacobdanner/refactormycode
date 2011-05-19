@@ -1,4 +1,0 @@
-page["fan_#{current_user.id}"].remove
-
-page[:add_friend].show
-page[:remove_friend].hide
