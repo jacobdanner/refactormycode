@@ -48,6 +48,13 @@ RefactorMyCode::Application.routes.draw do
   
   resources "sessions", "accounts", "badges","help"
   
+  resources "badges" do
+    member do
+      get "position"
+    end
+  end
+  match 'badges/:id.gif;position', :to => 'badges#position', :format => 'gif'
+  
   resource :session, :account
   
   # omniauth configuration
