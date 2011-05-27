@@ -14,7 +14,7 @@ module CodesHelper
   end
   
   def tag_list(code)
-    results = ', tagged with ' + (code.tag_list.collect { |tag| link_to(h(tag), tags_path(tag)) } * ', ') unless code.tag_list.empty?
+    results = ', tagged with ' + (code.tag_list.collect { |tag| link_to(tag, tags_path(:name => tag)) } * ', ') unless code.tag_list.empty?
     results.try(:html_safe)
   end
 end

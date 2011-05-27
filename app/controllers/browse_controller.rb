@@ -31,7 +31,7 @@ class BrowseController < ApplicationController
   end
   
   def tags
-    @tags = params[:tags]
+    @tags = params[:name]
     browse :codes,   :title => "Codes tagged with #{@tags}",
                      :order => 'created_at desc',
                      :conditions => language_conditions
