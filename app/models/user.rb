@@ -56,20 +56,6 @@ class User < ActiveRecord::Base
     self.name = nickname
   end
   
-  def self.find_or_create_by_identity_url(identity_url, attributes={})
-    identity_url.chop! if identity_url.ends_with?('/')
-    user = find :first, :conditions => ['identity_url = ? OR identity_url = ? OR ' +
-                                        'alternative_identity_url = ? OR alternative_identity_url = ?',
-                                        identity_url, identity_url + '/',
-                                        identity_url, identity_url + '/']
-    
-    unless user # New user
-      user = User.create({ :identity_url => identity_url }.merge(attributes))
-    end
-    
-    user
-  end
-  
   private
     def generate_missing_name
       self.name = self.authentications.map(&:uname).compact.first if name.blank?

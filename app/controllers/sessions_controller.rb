@@ -30,8 +30,8 @@ class SessionsController < ApplicationController
       # the below code should be updated to omniauth.
       authenticate_with_open_id(openid_url, :required => [:nickname, :email]) do |result, identity_url, registration|
         if result.successful?
-          self.current_user = User.find_or_create_by_identity_url(identity_url, registration.data)
-          successful_login
+          # self.current_user = User.find_or_create_by_identity_url(identity_url, registration.data)
+          # successful_login
         else
           failed_login result.message
         end
