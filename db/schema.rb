@@ -99,6 +99,9 @@ ActiveRecord::Schema.define(:version => 20110501032904) do
     t.string   "context"
   end
 
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
+
   create_table "tags", :force => true do |t|
     t.string "name"
   end

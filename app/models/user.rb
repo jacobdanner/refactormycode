@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   before_create :generate_missing_name
   
   def fans
-    Friendship.find(:all, :conditions => { :friend_id => id }).collect(&:user)
+    Friendship.where(:friend_id => id).collect(&:user)
   end
   
   def create_token!
