@@ -1,6 +1,5 @@
 <div id="<%= dom_id(code) %>" class="badge">
   <%= format_code truncate_lines(code.code, 3), code.language, :no_title => true %>
-  
   <div class="content">
     <h1>
       <span class="language <%= language_css(code.language) %>"><%= code.language %></span>

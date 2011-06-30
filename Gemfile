@@ -10,12 +10,13 @@ gem 'pg'
 # gem 'defensio'
 gem "kaminari"
 gem "omniauth"
-gem "coderay"
+#gem "coderay"
+gem "albino"
 gem "acts-as-taggable-on"
 gem "meta_search"
 
 group :development, :test do
-  gem 'ruby-debug'
+  gem 'ruby-debug19'
   gem 'shoulda'
   gem 'rspec'
   gem 'rspec-rails'

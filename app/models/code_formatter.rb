@@ -1,6 +1,6 @@
 class CodeFormatter
   cattr_reader :languages
-  @@languages = %w(Ruby PHP JavaScript ActionScript Java C C++ C# VB.NET Python Perl Lisp Erlang Haskell Bash Delphi).sort
+  @@languages = %w(Ruby PHP JavaScript ActionScript Java C C++ C# VB.NET Python Perl Lisp Erlang Haskell Bash Delphi HTML CSS Lua SQL ASP XML CoffeeScript Sass).sort
   
   cattr_reader :syntaxes
   @@syntaxes = @@languages
@@ -11,13 +11,7 @@ class CodeFormatter
   end
   
   def syntax
-    case @language
-    when 'Bash'   then 'shell-unix-generic'
-    when 'C++'    then 'c++'
-    when 'VB.NET' then 'asp_vb.net'
-    when 'Delphi' then 'pascal'
-    else self.class.escape_language @language
-    end
+    self.class.escape_language @language
   end
     
   def valid_syntax?(syntax)
@@ -26,12 +20,8 @@ class CodeFormatter
   
   def to_html(options={})
     return '' if @code.blank?
-    
-    html_escapes = { '&' => '&amp;', '"' => '&quot;', '>' => '&gt;', '<' => '&lt;' }
-    html_forbidden = html_escapes.keys
-
     split_in_sections.collect do |section|
-      "<pre language='#{section.syntax}'>" + section.code.gsub(/[#{html_forbidden}]/) { |c| html_escapes[c] }.strip + "</pre>"
+        Albino.colorize(section.code, section.syntax.downcase.to_sym)
     end.join("\n").html_safe
   end
 
@@ -98,7 +88,8 @@ class CodeFormatter
     when 'cpp'         then 'C++'
     when 'php'         then 'PHP'
     when 'javascript'  then 'JavaScript'
-    when 'actioncript' then 'ActionScript'
+    when 'actionscript' then 'ActionScript'
+    when 'coffeescript' then 'CoffeeScript'
     when 'vb'          then 'VB.NET'
     else language.titleize
     end
