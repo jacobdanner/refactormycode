@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships, :class_name => "User"
   has_many :authentications
   
+  alias_attribute :nickname, :name
+  
   # validates_presence_of :identity_url
   
   attr_protected :admin, :rating, :refactors_count
@@ -46,14 +48,6 @@ class User < ActiveRecord::Base
     end
     
     "#{RAILS_ROOT}/public/images/positions/#{image}.gif"
-  end
-  
-  def nickname
-    name
-  end
-  
-  def nickname=(nickname)
-    self.name = nickname
   end
   
   private
