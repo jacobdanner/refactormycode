@@ -4,24 +4,24 @@ require 'yaml'
 module Defensio
   class Error < RuntimeError; end
   class InvalidAPIKey < Error; end
-  
+
   class Response
     attr_reader :raw
-    
+
     def initialize(response_body)
       @raw = response_body
       @parameters = parse_response(response_body)
     end
-    
+
     def [](parameter)
       @parameters[parameter.to_s.tr('_', '-')]
     end
-    
+
     # Indicates whether the action could be processed
     def success?
       self[:status] == 'success'
     end
-    
+
     def self.response_attr_reader(*attrs)
       attrs.each do |attr|
         define_method attr do
@@ -32,10 +32,10 @@ module Defensio
 
     # a message provided by the action if applicable
     response_attr_reader :message
-    
+
     # the version of the API used to process the request
     response_attr_reader :api_version
-    
+
     private
       def parse_response(body)
         response = YAML.load(body)['defensio-result'] rescue nil
@@ -43,44 +43,44 @@ module Defensio
         response
       end
   end
-  
+
   class AuditCommentResponse < Response
     # a message signature that uniquely identifies the comment in the Defensio
     # system. this signature should be stored by the client for retraining purposes
     response_attr_reader :signature
-    
+
     # A boolean value indicating whether Defensio believe the comment to be spam
     response_attr_reader :spam
-    
+
     # A value indicating the relative likelihood of the comment being spam.
     # this value should be stored by the client for use in building convenient
     # spam sorting user-interfaces
     response_attr_reader :spaminess
   end
-  
+
   class StatsResponse < Response
     # Describes the percentage of comments correctly identified as spam/ham
     # by Defensio on this blog
     response_attr_reader :accuracy
-    
+
     # the number of spam comments caught by the filter
     response_attr_reader :spam
-    
+
     # the number of ham (legitimate) comments accepted by the filter
     response_attr_reader :ham
-    
+
     # the number of times a legitimate message was retrained from the spambox
-    # (i.e. "de-spammed" by the user)	
+    # (i.e. "de-spammed" by the user)
     response_attr_reader :false_positives
-    
+
     # the number of times a spam message was retrained from comments box
     # (i.e. "de-legitimized" by the user)
     response_attr_reader :false_negatives
   end
-  
+
   class Client
     attr_accessor :api_key, :owner_url, :version
-    
+
     # Create a new Defensio service wrapper.
     #
     # Required options:
@@ -93,15 +93,15 @@ module Defensio
       @api_key   = options.delete(:api_key)   || raise(InvalidAPIKey, 'api_key required')
       @owner_url = options.delete(:owner_url) || raise(Error, 'owner_url required')
       @version   = options.delete(:version)   || '1.1'
-      
+
       @default_params = { :owner_url => @owner_url }
     end
-    
+
     # This action verifies that the key is valid for the owner calling the service.
     def validate_key
       call :validate_key, Response
     end
-    
+
     # This action should be invoked upon the publication of an article to announce
     # its existence. The actual content of the article is sent to Defensio for analysis.
     #
@@ -117,11 +117,11 @@ module Defensio
     def announce_article(params)
       call :announce_article, Response, params
     end
-    
+
     # This central action determines not only whether Defensio thinks a comment is spam
     # or not, but also a measure of its "spaminess", i.e. its relative likelihood of being
     # spam.
-    # 
+    #
     # It should be noted that one of Defensio's key features is its ability to rank spam
     # according to how "spammy" it appears to be. In order to make the most of the Defensio
     # system in their applications, developers should take advantage of the spaminess value
@@ -134,7 +134,7 @@ module Defensio
     #                         the comment
     #   article_date          the date the original blog article      yyyy/mm/dd
     #                         was posted
-    #   comment_author        the name of the author of the comment	  any string
+    #   comment_author        the name of the author of the comment    any string
     #   comment_type          the type of the comment being posted    comment, trackback,
     #                         to the blog                             pingback, other
     #
@@ -170,11 +170,11 @@ module Defensio
     def audit_comment(params)
       call :audit_comment, AuditCommentResponse, params
     end
-    
+
     # This action is used to retrain false negatives. That is to say, to indicate to
     # the filter that comments originally tagged as "ham" (i.e. legitimate) were in
     # fact spam.
-    # 
+    #
     # Retraining the filter in this manner contributes to a personalized learning
     # effect on the filtering algorithm that will improve accuracy for each user over time.
     #
@@ -189,12 +189,12 @@ module Defensio
     def report_false_negatives(params)
       call :report_false_negatives, Response, params
     end
-    
+
     # This action is used to retrain false positives. That is to say, to indicate to
     # the filter that comments originally tagged as spam were in fact "ham" (i.e.
     # legitimate comments).
-    # 
-    # Retraining the filter in this manner contributes to a personalized learning 
+    #
+    # Retraining the filter in this manner contributes to a personalized learning
     # effect on the filtering algorithm that will improve accuracy for each user
     # over time.
     #
@@ -202,30 +202,30 @@ module Defensio
     def report_false_positives(params)
       call :report_false_positives, Response, params
     end
-    
+
     # This action returns basic statistics regarding the performance of Defensio
     # since activation.
     def get_stats
       call :get_stats, StatsResponse
     end
-    
+
     protected
       def convert_name(name)
         name.to_s.tr('_', '-')
       end
-    
+
       def convert_params(params)
         params.inject({}) do |hash, (param, value)|
           hash[convert_name(param)] = value
           hash
         end
       end
-    
+
       def call(action, response_class, params={})
         RAILS_DEFAULT_LOGGER.debug "[DEFENSIO] #{action} #{params.inspect}"
         response_class.new post(convert_name(action), convert_params(@default_params.merge(params)))
       end
-    
+
       def post(action, params={})
         Net::HTTP.post_form(URI.parse("http://api.defensio.com/app/#{@version}/#{action}/#{@api_key}.yaml"), params).body
       end
