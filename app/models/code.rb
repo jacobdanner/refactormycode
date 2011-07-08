@@ -26,7 +26,7 @@ class Code < ActiveRecord::Base
   end
 
   def user_email
-    user.email || "no-email@refactormycode.com"
+    user.email.presence || "no-email@refactormycode.com"
   end
 
   def permalink_url
@@ -54,7 +54,7 @@ class Code < ActiveRecord::Base
 
   private
     def email_if_notify_me
-      errors.add :user, 'email is required for notification' if (user.nil? || user.email.blank?) && notify_me == '1'
+      errors.add :user, 'email is required for notification' if notify_me == '1' && user.email.blank?
     end
 
     def create_notification
