@@ -222,7 +222,7 @@ module Defensio
       end
 
       def call(action, response_class, params={})
-        RAILS_DEFAULT_LOGGER.debug "[DEFENSIO] #{action} #{params.inspect}"
+        ::Rails.logger.debug "[DEFENSIO] #{action} #{params.inspect}"
         response_class.new post(convert_name(action), convert_params(@default_params.merge(params)))
       end
 

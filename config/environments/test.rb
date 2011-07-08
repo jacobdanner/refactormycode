@@ -11,8 +11,8 @@ RefactorMyCode::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.action_controller.consider_all_requests_local = true
-  config.action_controller.perform_caching             = false
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = false
 
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection    = false
@@ -21,8 +21,6 @@ RefactorMyCode::Application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
 
+  config.active_support.deprecation    = :stderr
   config.action_mailer.delivery_method = :test
-
-  config.active_support.deprecation :stderr 
-
 end
