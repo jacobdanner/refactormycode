@@ -22,8 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def position
-    User.find(:all, :order      => 'rating desc, refactors_count desc',
-                    :conditions => ['rating >= ?', rating.to_i]).index(self) + 1
+    self.class.where('rating >= ?', rating.to_i).order('rating desc, refactors_count desc').index(self) + 1
   end
 
   def rated?(refactor)
