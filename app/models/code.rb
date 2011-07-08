@@ -15,6 +15,8 @@ class Code < ActiveRecord::Base
 
   # acts_as_ferret :fields => [:title, :comment, :code, :language, :tag_list],
   #                :single_index => true
+  
+  delegate :name, :to => :user, :prefix => true
 
   acts_as_taggable_on :tags
   
@@ -24,10 +26,6 @@ class Code < ActiveRecord::Base
   
   def to_param
     "#{id}-#{permalink}"
-  end
-
-  def user_name
-    user.name
   end
   
   def user_email
