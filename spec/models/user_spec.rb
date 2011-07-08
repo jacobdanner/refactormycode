@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) {Factory :user}
+  let(:user)  {Factory :user}
   let(:user1) {Factory :user}
   let(:user2) {Factory :user}
 
   it "should get 2 user's fans" do
-    Factory.create :friendship, :user => user1 ,:friend => user
-    Factory.create :friendship, :user => user2, :friend => user
+    user1.friendships.create :friend => user
+    user2.friendships.create :friend => user
     user.fans.should have(2).records
   end
 
