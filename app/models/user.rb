@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
       'top10000'
     end
 
-    "#{RAILS_ROOT}/public/images/positions/#{image}.gif"
+    "#{Rails.root}/public/images/positions/#{image}.gif"
   end
 
   private
