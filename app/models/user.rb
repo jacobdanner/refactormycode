@@ -15,9 +15,7 @@ class User < ActiveRecord::Base
   
   before_create :generate_missing_name
   
-  def fans
-    Friendship.where(:friend_id => id).collect(&:user)
-  end
+  alias_method :fans, :friends
   
   def create_token!
     self.token = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{name}--")
@@ -25,7 +23,7 @@ class User < ActiveRecord::Base
     self.token
   end
   
-  def position
+  def position    
     User.find(:all, :order      => 'rating desc, refactors_count desc',
                     :conditions => ['rating >= ?', rating.to_i]).index(self) + 1
   end
