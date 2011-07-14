@@ -47,7 +47,7 @@ GEM
     autowatchr (0.1.5)
       watchr
     builder (2.1.2)
-    columnize (0.3.3)
+    columnize (0.3.4)
     database_cleaner (0.6.7)
     diff-lcs (1.1.2)
     erubis (2.6.6)
@@ -92,7 +92,7 @@ GEM
     mynyml-redgreen (0.7.1)
       term-ansicolor (>= 1.0.4)
     net-ldap (0.2.2)
-    nokogiri (1.4.6)
+    nokogiri (1.4.7)
     oa-basic (0.2.6)
       oa-core (= 0.2.6)
       rest-client (~> 1.6.0)
@@ -130,7 +130,6 @@ GEM
       oa-more (= 0.2.6)
       oa-oauth (= 0.2.6)
       oa-openid (= 0.2.6)
-    pg (0.11.0)
     polyglot (0.3.1)
     posix-spawn (0.3.6)
     profanity_filter (0.0.2)
@@ -211,13 +210,11 @@ DEPENDENCIES
   meta_search (= 1.0.5)
   mynyml-redgreen
   omniauth
-  pg
   profanity_filter
   rails (= 3.0.7)
   rails_admin!
   rspec
   rspec-rails
   ruby-debug19
-  ruby-openid
   shoulda
   watchr

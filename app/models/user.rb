@@ -6,32 +6,31 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :friends, :through => :friendships, :class_name => "User"
   has_many :authentications
-  
-  # validates_presence_of :identity_url
-  
+
+  alias_attribute :nickname, :name
+
   attr_protected :admin, :rating, :refactors_count
-  
+
   before_create :generate_missing_name
-  
+
   def fans
     Friendship.where(:friend_id => id).collect(&:user)
   end
-  
+
   def create_token!
     self.token = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{name}--")
     save(false)
     self.token
   end
-  
+
   def position
-    User.find(:all, :order      => 'rating desc, refactors_count desc',
-                    :conditions => ['rating >= ?', rating.to_i]).index(self) + 1
+    self.class.where('rating >= ?', rating.to_i).order('rating desc, refactors_count desc').index(self) + 1
   end
-  
+
   def rated?(refactor)
     ratings.any? { |rating| rating.refactor == refactor }
   end
-  
+
   def position_image
     image = if position < 10
       position
@@ -44,8 +43,8 @@ class User < ActiveRecord::Base
     else
       'top10000'
     end
-    
-    "#{RAILS_ROOT}/public/images/positions/#{image}.gif"
+
+    "#{Rails.root}/public/images/positions/#{image}.gif"
   end
   
   def nickname
