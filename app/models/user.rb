@@ -56,6 +56,11 @@ class User < ActiveRecord::Base
     self.name = nickname
   end
   
+  def set_admin
+    self.admin = true
+    self.save
+  end
+  
   private
     def generate_missing_name
       self.name = self.authentications.map(&:uname).compact.first if name.blank?

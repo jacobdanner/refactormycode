@@ -58,7 +58,7 @@
 	    <%= menu_item :spam, 'Spam', spam_path %>
 	<% end -%>
 	<% if current_user -%>
-    	<%= menu_item :account, 'Account', account_path %>
+    	<%= menu_item :account, 'Account', account_path(current_user) %>
     	<%= menu_item :logout, 'Logout', logout_path %>
 	<% else -%>
     	<%= menu_item :login, 'Login', login_path %>

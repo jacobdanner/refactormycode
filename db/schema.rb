@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110501032904) do
+ActiveRecord::Schema.define(:version => 20110714080503) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -64,6 +64,19 @@ ActiveRecord::Schema.define(:version => 20110501032904) do
     t.string  "salt",       :null => false
   end
 
+  create_table "rails_admin_histories", :force => true do |t|
+    t.string   "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_histories_on_item_and_table_and_month_and_year"
+
   create_table "ratings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "refactor_id"
@@ -98,9 +111,6 @@ ActiveRecord::Schema.define(:version => 20110501032904) do
     t.string   "tagger_type"
     t.string   "context"
   end
-
-  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
-  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
 
   create_table "tags", :force => true do |t|
     t.string "name"

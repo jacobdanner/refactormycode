@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '3.0.7'
 gem 'jquery-rails', '>= 0.2.6'
 
 gem 'json'
@@ -13,7 +13,8 @@ gem "omniauth"
 gem "profanity_filter"
 gem "albino"
 gem "acts-as-taggable-on"
-gem "meta_search"
+gem "meta_search", "1.0.5"
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 group :development, :test do
   gem 'ruby-debug19'
