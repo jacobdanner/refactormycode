@@ -1,5 +1,8 @@
+# disable the ssl. more details in https://github.com/intridea/omniauth/issues/260
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :github, '48c6aade1f31410073a2', '082d0e487cb89b7b521eace61eb18c3d08370ed3'
+  provider :github, '48c6aade1f31410073a2', '082d0e487cb89b7b521eace61eb18c3d08370ed3'#, {:client_options => {:ssl => {:ca_path => "/opt/local/share/curl/curl-ca-bundle.crt"}}}
   
   # ALWAYS RESTART YOUR SERVER IF YOU MAKE CHANGES TO THESE SETTINGS!
   
