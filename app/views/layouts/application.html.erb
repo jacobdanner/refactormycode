@@ -56,6 +56,7 @@
     <%= menu_item :submit, 'Submit', new_code_path %>
 	<% if current_user.try(:admin?) -%>
 	    <%= menu_item :spam, 'Spam', spam_path %>
+	    <%= menu_item :spam, 'Admin', "/admin" %>
 	<% end -%>
 	<% if current_user -%>
     	<%= menu_item :account, 'Account', account_path(current_user) %>
