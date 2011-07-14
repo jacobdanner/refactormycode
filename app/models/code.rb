@@ -1,4 +1,7 @@
 class Code < ActiveRecord::Base
+  # here we must use profanity default way to do filter. it supports the profanity_filtered? below!
+  profanity_filter :title, :comment, :code, :permalink
+  
   has_many :refactors, :conditions => { :spam => false }, :dependent => :destroy
   belongs_to :user
   
@@ -21,6 +24,10 @@ class Code < ActiveRecord::Base
   attr_protected :user_id, :user
   
   after_save     :create_notification
+  
+  def profanity_filtered?
+    "#{self.title} #{self.comment} #{self.code} #{self.permalink}".include?('@#$')
+  end
   
   def to_param
     "#{id}-#{permalink}"

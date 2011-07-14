@@ -1,4 +1,7 @@
 class Refactor < ActiveRecord::Base
+  # here we must use profanity default way to do filter. it supports the profanity_filtered? below!
+  profanity_filter :title, :comment, :code
+  
   belongs_to :refactored_code, :class_name => "Code", :foreign_key => "code_id"
   belongs_to :user
   has_many   :ratings
@@ -51,6 +54,10 @@ class Refactor < ActiveRecord::Base
   
   def content
     [self.comment.to_s, self.code.to_s] * "\n"
+  end
+  
+  def profanity_filtered?
+    "#{self.title} #{self.comment} #{self.code}".include?('@#$')
   end
   
   def title

@@ -10,7 +10,7 @@ gem 'pg'
 # gem 'defensio'
 gem "kaminari"
 gem "omniauth"
-#gem "coderay"
+gem "profanity_filter"
 gem "albino"
 gem "acts-as-taggable-on"
 gem "meta_search"
@@ -28,4 +28,3 @@ group :development, :test do
   gem 'faker'
   gem 'mail_safe'
 end
-

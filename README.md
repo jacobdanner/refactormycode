@@ -9,6 +9,7 @@ One of my colleagues, [Jon](http://intridea.com/about/people/jonbishop), mention
 #### **What's happening to RefactorMyCode in last few months?** ####
 
 ![RefactorMyCode.com](https://img.skitch.com/20110628-x8pwpuuba4dmkg4kr4fdf9xua5.jpg)
+
 Obviously, upgrading Rails 2.0.2 to Rails 3.0 is a pain as it has a two-years updating gap between this two versions. The main troubles are to fix **routes** and **ajax** related issues. Here the [rails_upgrade](https://github.com/jm/rails_upgrade) plugin really helps that out. 
 
 In our case, some of its ajax requests were canceled and refactored as direct requests, that'd be more flexible. We removed the old [will_paginate](https://github.com/mislav/will_paginate) and used [kaminari](https://github.com/amatsuda/kaminari) as its new pagination solution. Similar updates include upgrading to [acts-as-taggable-on](https://github.com/mbleigh/acts-as-taggable-on) and syntax highligh functions with [coderay](http://coderay.rubychan.de/).
